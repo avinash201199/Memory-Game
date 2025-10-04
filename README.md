@@ -74,7 +74,7 @@ Then open [http://localhost:8080](http://localhost:8080) in your browser or go t
 
 ## 🖼️ UI Preview
 
-| ![](Memory-Game/img/Game-ui.jpg) |
+| ![](Memory-Game/img/Game-ui.png) |
 |:-------------------------------:|
 
 ---

@@ -105,6 +105,8 @@
       background:linear-gradient(180deg,var(--vault-yellow),#f0c33a);color:#021021;box-shadow:0 6px 18px rgba(0,0,0,0.35);
     }
     .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    
+    .btn.mode{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
     .hint{margin-top:1rem;font-size:0.84rem;color:#9fb6d9}
 
@@ -194,10 +196,7 @@
       font-size: 14px;
     }
 
-  .page3 .two{
-
-  }
-   
+  
   </style>
 </head>
 
@@ -214,7 +213,7 @@
         </div>
       </div>
 
-      <div class="score-box">
+      <div class="score-box" >
         <div class="score-row">
           <div>
             <div class="label">Moves</div>
@@ -245,6 +244,7 @@
         <div class="controls">
           <button class="btn" id="restart">Restart</button>
           <button class="btn ghost" id="hint">Reveal 1 Pair</button>
+          <button class="btn mode" id="modebtn"><i class="fa-solid fa-sun"></i></button>
         </div>
 
         <div class="hint">Tip: Try to remember positions — the Pip‑Boy rewards patience.</div>
@@ -262,9 +262,9 @@
         <div style="font-family:'Share Tech Mono',monospace;color:var(--muted)">Difficulty: <strong style="color:var(--vault-yellow)">Medium</strong></div>
       </div>
 
-      <section class="deck" id="deck" aria-live="polite" aria-label="Game cards"></section>
+      <section class="deck" id="deck" aria-live="polite" aria-label="Game cards" ></section> <!--actual play cards-->
 
-      <div style="width:100%;display:flex;align-items:center;justify-content:center">
+      <div style="width:100%;display:flex;align-items:center;justify-content:center; " >
         <button class="btn" id="restart-bottom">Restart Game</button>
       </div>
 
@@ -406,6 +406,20 @@
         deckEl.appendChild(li);
       });
     }
+
+//switch mode
+const modeBtn = document.getElementById('modebtn');
+modeBtn.addEventListener('click', ()=>{
+  document.body.classList.toggle('dark-mode');
+  if(document.body.classList.contains('dark-mode')){
+    modeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    document.body.style.background = '#FFF5EA'; 
+  } else {
+    modeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    document.body.style.background = '#011e3a';
+  }
+
+})
 
     function resetGame(){
       stopTimer();

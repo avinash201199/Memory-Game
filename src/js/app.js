@@ -366,7 +366,11 @@
   }
 
   // difficulty control
-  diffControls.addEventListener('click', (e)=>{
+  // defensive: ensure the DOM node exists before attaching handlers
+  if(!diffControls){ console.warn('difficultyControls element not found — difficulty buttons will not work'); }
+  else {
+    console.log('difficultyControls found — wiring difficulty buttons');
+    diffControls.addEventListener('click', (e)=>{
     const b = e.target.closest('button[data-diff]');
     if(!b) return;
     selectedDifficulty = b.getAttribute('data-diff');
@@ -377,7 +381,8 @@
     totalTiles = pairCount * 2;
     resetGame();
     renderLeaderboard();
-  });
+    });
+  }
 
   // modal accessibility: trap focus inside modal when open
   function trapFocus(e){

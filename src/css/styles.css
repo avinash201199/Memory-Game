@@ -63,6 +63,7 @@ body {
 .lb-list { margin-top: 0.8rem; display:flex; flex-direction:column; gap:0.45rem }
 .lb-row { display:flex; justify-content:space-between; gap:0.6rem; padding:0.45rem; border-radius:8px; background:rgba(255,255,255,0.02); font-size:0.92rem }
 .lb-controls { display:flex; gap:0.5rem; margin-top:0.8rem }
+.lb-list { min-height: 48px; }
 .muted-note { color:var(--muted); font-size:0.85rem }
 
 .brand {
@@ -410,6 +411,7 @@ h1.title {
   color: var(--muted);
   border: 1px solid rgba(255,255,255,0.08);
   transition: background 0.2s, color 0.2s;
+  cursor: pointer;
 }
 .difficulty-btn.btn--active {
   background: var(--vault-yellow);

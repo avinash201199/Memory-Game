@@ -4,6 +4,9 @@
 
 ---
 
+[Join WhatsApp channel for any doubts](https://chat.whatsapp.com/BfBWJhy4xj3CJFSGE2qBrL)
+
+
 ## 📌 Overview
 
 **Vault-Tec Memory** is a retro-inspired card matching game styled after the Pip-Boy from Fallout.  

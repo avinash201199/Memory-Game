@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,14 +12,22 @@
   <style>
     :root{
       --vault-blue:#052c6b; 
-      
       --vault-yellow:#ffd23f; 
-      
       --muted:#b6c2d8;
       --panel:#0b1730;
       --glass:rgba(255,255,255,0.04);
       --card-back:#0a2340;
       --accent-glow:0 6px 30px rgba(37,152,255,0.12);
+    }
+
+    body.light-mode {
+      --vault-blue:#1e88e5;
+      --vault-yellow:#42a5f5;
+      --muted:#546e7a;
+      --panel:#e3f2fd;
+      --glass:rgba(0,0,0,0.04);
+      --card-back:#90caf9;
+      --accent-glow:0 6px 30px rgba(33,150,243,0.2);
     }
 
     *{box-sizing:border-box}
@@ -39,10 +46,56 @@
       display:flex;
       align-items:center;
       justify-content:center;
+      transition: background 0.5s ease, color 0.3s ease;
+      position: relative;
     }
 
+    body.light-mode {
+      background: radial-gradient(1200px 700px at 10% 10%, rgba(144,202,249,0.4), transparent),
+                  radial-gradient(900px 500px at 90% 90%, rgba(100,181,246,0.35), transparent),
+                  linear-gradient(180deg, #e0f2fe 0%, #b3e5fc 60%);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      z-index: 100;
+      background: linear-gradient(135deg, var(--vault-blue), #1565c0);
+    }
+
+    body.light-mode .theme-toggle {
+      background: linear-gradient(135deg, var(--vault-yellow), #2196f3);
+      border-color: rgba(0,0,0,0.1);
+      box-shadow: 0 6px 20px rgba(33,150,243,0.3);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .theme-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .hidden {
+      display: none;
+    }
   
-    
     .app{
       width:100%;
       max-width:1100px;
@@ -51,9 +104,7 @@
       gap:2rem;
       align-items:start;
     }
-
    
-    
     .panel{
       background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
       border:1px solid rgba(255,255,255,0.04);
@@ -61,6 +112,12 @@
       padding:1.6rem;
       box-shadow:var(--accent-glow);
       min-height:420px;
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(227,242,253,0.9));
+      border: 1px solid rgba(33,150,243,0.2);
     }
 
     .brand{
@@ -77,81 +134,225 @@
       border:2px solid rgba(255,255,255,0.06);
       box-shadow:0 6px 24px rgba(17,68,128,0.25), inset 0 -8px 20px rgba(0,0,0,0.4);
       font-size:1.6rem;
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .vault-badge {
+      background: linear-gradient(180deg, var(--vault-blue), #1976d2);
+      color: white;
+      border-color: rgba(0,0,0,0.1);
+      box-shadow: 0 6px 24px rgba(33,150,243,0.3), inset 0 -8px 20px rgba(0,0,0,0.15);
     }
 
     h1.title{
       font-size:1.35rem;margin:0;color:var(--vault-yellow);font-family:'Share Tech Mono',monospace;
-      letter-spacing:0.08rem;text-transform:uppercase;font-weight:700
+      letter-spacing:0.08rem;text-transform:uppercase;font-weight:700;
+      transition: color 0.3s ease;
     }
-    .subtitle{font-size:0.92rem;color:var(--muted);margin-top:0.35rem}
 
-    .score-box{margin-top:1.4rem;background:var(--panel);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    body.light-mode h1.title {
+      color: var(--vault-blue);
+    }
+
+    .subtitle{
+      font-size:0.92rem;color:var(--muted);margin-top:0.35rem;
+      transition: color 0.3s ease;
+    }
+
+    .score-box{
+      margin-top:1.4rem;background:var(--panel);padding:1rem;border-radius:10px;
+      border:1px solid rgba(255,255,255,0.03);
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .score-box {
+      background: rgba(227,242,253,0.8);
+      border: 1px solid rgba(33,150,243,0.15);
+    }
 
     .score-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem}
-    .score-row .label{font-size:0.86rem;color:var(--muted)}
-    .score-big{font-weight:700;color:var(--vault-yellow);font-size:1.4rem}
+    .score-row .label{font-size:0.86rem;color:var(--muted);transition: color 0.3s ease;}
+    .score-big{
+      font-weight:700;color:var(--vault-yellow);font-size:1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    body.light-mode .score-big {
+      color: var(--vault-blue);
+    }
 
     .stars{display:flex;gap:0.4rem;align-items:center}
-    .star{width:40px;height:32px;border-radius:6px;background:linear-gradient(180deg,var(--vault-yellow),#f7c84b);display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#00142b}
-    .star--lost{opacity:0.18;filter:grayscale(1)}
+    .star{
+      width:40px;height:32px;border-radius:6px;
+      background:linear-gradient(180deg,var(--vault-yellow),#f7c84b);
+      display:inline-flex;align-items:center;justify-content:center;
+      font-weight:700;color:#00142b;
+      transition: all 0.3s ease;
+    }
 
-    .timer-panel{display:flex;gap:0.6rem;align-items:center}
-    .timer-value{background:linear-gradient(90deg,#021a43, #06254f);padding:0.45rem 0.8rem;border-radius:8px;color:var(--muted);font-family:'Share Tech Mono',monospace}
+    body.light-mode .star {
+      background: linear-gradient(180deg, var(--vault-yellow), #2196f3);
+      color: white;
+    }
+
+    .star--lost{opacity:0.18;filter:grayscale(1)}
 
     .controls{display:flex;gap:0.6rem;margin-top:1rem}
     .btn{
       border:none;padding:0.6rem 0.9rem;border-radius:10px;cursor:pointer;font-weight:600;
-      background:linear-gradient(180deg,var(--vault-yellow),#f0c33a);color:#021021;box-shadow:0 6px 18px rgba(0,0,0,0.35);
+      background:linear-gradient(180deg,var(--vault-yellow),#f0c33a);
+      color:#021021;box-shadow:0 6px 18px rgba(0,0,0,0.35);
+      transition: all 0.3s ease;
     }
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
-    .hint{margin-top:1rem;font-size:0.84rem;color:#9fb6d9}
+    .btn:hover {
+      transform: translateY(-2px);
+    }
 
-    
+    body.light-mode .btn {
+      background: linear-gradient(180deg, var(--vault-blue), #1565c0);
+      color: white;
+    }
+
+    .btn.ghost{
+      background:transparent;border:1px solid rgba(255,255,255,0.04);
+      color:var(--muted);
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .btn.ghost {
+      border: 1px solid rgba(33,150,243,0.3);
+      color: var(--vault-blue);
+    }
+
+    .hint{
+      margin-top:1rem;font-size:0.84rem;color:#9fb6d9;
+      transition: color 0.3s ease;
+    }
+
+    body.light-mode .hint {
+      color: #546e7a;
+    }
     
     .game{
-      padding:1.2rem;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border:1px solid rgba(255,255,255,0.03);min-height:420px;display:flex;flex-direction:column;align-items:center;gap:1rem
+      padding:1.2rem;border-radius:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border:1px solid rgba(255,255,255,0.03);min-height:420px;
+      display:flex;flex-direction:column;align-items:center;gap:1rem;
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .game {
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(227,242,253,0.9));
+      border: 1px solid rgba(33,150,243,0.2);
     }
 
     .top-row{width:100%;display:flex;align-items:center;justify-content:space-between}
-    .progress{font-family:'Share Tech Mono',monospace;color:var(--muted);font-size:0.9rem}
-
+    .progress{
+      font-family:'Share Tech Mono',monospace;color:var(--muted);font-size:0.9rem;
+      transition: color 0.3s ease;
+    }
    
-    
     .deck{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;max-width:720px;padding:1rem;align-content:center;
-      justify-items:center;justify-content:center;
+      display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;max-width:720px;
+      padding:1rem;align-content:center;justify-items:center;justify-content:center;
     }
 
     .card{
-      width:140px;height:140px;border-radius:12px;perspective:1000px;user-select:none;position:relative;
+      width:140px;height:140px;border-radius:12px;perspective:1000px;
+      user-select:none;position:relative;
     }
-    .card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.9,.2,1)}
+    .card-inner{
+      position:relative;width:100%;height:100%;transform-style:preserve-3d;
+      transition:transform .45s cubic-bezier(.2,.9,.2,1)
+    }
     .card.is-flip .card-inner{transform:rotateY(180deg)}
 
-    .card-face{position:absolute;inset:0;border-radius:12px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .card-face{
+      position:absolute;inset:0;border-radius:12px;display:flex;
+      align-items:center;justify-content:center;backface-visibility:hidden;
+      border:1px solid rgba(255,255,255,0.03)
+    }
 
-    .card-back{background:linear-gradient(180deg,var(--card-back),#041a37);box-shadow:inset 0 -8px 30px rgba(0,0,0,0.6);}
-    .card-back .logo{font-family:'Share Tech Mono',monospace;color:var(--vault-yellow);font-weight:700;font-size:1.4rem}
+    .card-back{
+      background:linear-gradient(180deg,var(--card-back),#041a37);
+      box-shadow:inset 0 -8px 30px rgba(0,0,0,0.6);
+      transition: all 0.3s ease;
+    }
 
-    .card-front{transform:rotateY(180deg);background:#ffffff;border:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center}
+    body.light-mode .card-back {
+      background: linear-gradient(180deg, var(--card-back), #64b5f6);
+      box-shadow: inset 0 -8px 30px rgba(0,0,0,0.15);
+      border: 1px solid rgba(33,150,243,0.2);
+    }
+
+    .card-back .logo{
+      font-family:'Share Tech Mono',monospace;
+      color:var(--vault-yellow);font-weight:700;font-size:1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    body.light-mode .card-back .logo {
+      color: white;
+    }
+
+    .card-front{
+      transform:rotateY(180deg);background:#ffffff;
+      border:1px solid rgba(0,0,0,0.06);display:flex;
+      align-items:center;justify-content:center
+    }
     .card-front img{max-width:84%;max-height:84%;display:block;border-radius:6px}
 
     .card.match .card-inner{animation:matchPulse .9s ease-in-out 1}
     @keyframes matchPulse{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
 
-  
-  
-    .modal-overlay{position:fixed;inset:0;background:rgba(1,6,12,0.6);display:none;align-items:center;justify-content:center;z-index:30}
-    .modal-box{background:linear-gradient(180deg,#061a35,#03203d);padding:2rem;border-radius:12px;border:1px solid rgba(255,255,255,0.06);width:min(580px,94%);color:var(--muted);box-shadow:0 20px 60px rgba(2,16,40,0.7)}
-    .modal-box h2{color:var(--vault-yellow);font-family:'Share Tech Mono',monospace;margin:0 0 0.6rem}
+    .modal-overlay{
+      position:fixed;inset:0;background:rgba(1,6,12,0.6);
+      display:none;align-items:center;justify-content:center;z-index:30;
+      transition: background 0.3s ease;
+    }
+
+    body.light-mode .modal-overlay {
+      background: rgba(224,242,254,0.6);
+    }
+
+    .modal-box{
+      background:linear-gradient(180deg,#061a35,#03203d);
+      padding:2rem;border-radius:12px;border:1px solid rgba(255,255,255,0.06);
+      width:min(580px,94%);color:var(--muted);
+      box-shadow:0 20px 60px rgba(2,16,40,0.7);
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .modal-box {
+      background: linear-gradient(180deg, #e1f5fe, #b3e5fc);
+      border: 1px solid rgba(33,150,243,0.2);
+      box-shadow: 0 20px 60px rgba(33,150,243,0.3);
+    }
+
+    .modal-box h2{
+      color:var(--vault-yellow);font-family:'Share Tech Mono',monospace;
+      margin:0 0 0.6rem;
+      transition: color 0.3s ease;
+    }
+
+    body.light-mode .modal-box h2 {
+      color: var(--vault-blue);
+    }
+
     .modal-stats{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
-    .stat-card{background:rgba(255,255,255,0.02);padding:0.8rem;border-radius:8px;border:1px solid rgba(255,255,255,0.02);min-width:120px}
+    .stat-card{
+      background:rgba(255,255,255,0.02);padding:0.8rem;border-radius:8px;
+      border:1px solid rgba(255,255,255,0.02);min-width:120px;
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .stat-card {
+      background: rgba(227,242,253,0.8);
+      border: 1px solid rgba(33,150,243,0.15);
+    }
 
     .confetti{height:80px;margin-top:0.6rem}
-
-  
   
     @media (max-width:900px){
       .app{grid-template-columns:1fr;max-width:920px}
@@ -165,13 +366,36 @@
       .deck{grid-template-columns:repeat(2,1fr)}
       .card{width:98px;height:98px}
       .panel{min-height:auto}
+      .theme-toggle {
+        top: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
-    <aside class="panel" aria-hidden="false">
+  <button class="theme-toggle" id="themeToggle">
+    <svg id="moonIcon" class="hidden" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    <svg id="sunIcon" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </button>
+
+  <div class="app">
+    <aside class="panel">
       <div class="brand">
         <div class="vault-badge">VT</div>
         <div>
@@ -196,9 +420,9 @@
           <div>
             <div class="label">Star Rating</div>
             <div class="stars" id="star-rating">
-              <div class="star" data-star="1">★</div>
-              <div class="star" data-star="2">★</div>
-              <div class="star" data-star="3">★</div>
+              <div class="star">★</div>
+              <div class="star">★</div>
+              <div class="star">★</div>
             </div>
           </div>
 
@@ -217,7 +441,7 @@
       </div>
 
       <div style="margin-top:1rem;font-size:0.85rem;color:#89a6cf;display:flex;gap:0.6rem;align-items:center">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2v6" stroke="#ffd23f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 8c1-6 14-6 14 0" stroke="#89a6cf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2v6" stroke="#ffd23f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 8c1-6 14-6 14 0" stroke="#89a6cf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         <div>Designed with Vault‑Tec aesthetics — blue panels, bold yellow accents and terminal fonts.</div>
       </div>
     </aside>
@@ -225,30 +449,22 @@
     <main class="game">
       <div class="top-row">
         <div class="progress">Find all pairs — Good luck, Vault Dweller.</div>
-        <div style="font-family:'Share Tech Mono',monospace;color:var(--muted)">Difficulty: <strong style="color:var(--vault-yellow)">Medium</strong></div>
+        <div style="font-family:'Share Tech Mono',monospace;color:var(--muted)">Difficulty: <strong style="color:var(--vault-yellow);transition:color 0.3s">Medium</strong></div>
       </div>
 
-      <section class="deck" id="deck" aria-live="polite" aria-label="Game cards"></section>
+      <section class="deck" id="deck"></section>
 
       <div style="width:100%;display:flex;align-items:center;justify-content:center">
         <button class="btn" id="restart-bottom">Restart Game</button>
       </div>
-
     </main>
   </div>
 
-
-  
-  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-box" role="document">
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
       <h2>CONGRATULATIONS, Vault Dweller</h2>
       <div class="subtitle">You matched all pairs — Vault‑Tec is proud.</div>
-
-      <div class="modal-stats" id="modalStats">
-       
-        
-      </div>
-
+      <div class="modal-stats" id="modalStats"></div>
       <div style="display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end">
         <button class="btn ghost" id="closeModal">Close</button>
         <button class="btn" id="playAgain">Play Again</button>
@@ -257,9 +473,7 @@
   </div>
 
   <script>
-   
-   
-    const cardPool = [
+    var cardPool = [
       'Agility.png','Agility.png',
       'Boat.png','Boat.png',
       'Citizenship.png','Citizenship.png',
@@ -270,78 +484,77 @@
       'Shock.png','Shock.png'
     ];
 
-   
-    
-    const deckEl = document.getElementById('deck');
-    const movesEl = document.getElementById('moves');
-    const timeEl = document.getElementById('time');
-    const pairsEl = document.getElementById('pairs');
-    const starsEl = document.getElementById('star-rating');
-    const restartBtn = document.getElementById('restart');
-    const restartBottom = document.getElementById('restart-bottom');
-    const hintBtn = document.getElementById('hint');
-    const modal = document.getElementById('modalOverlay');
-    const playAgainBtn = document.getElementById('playAgain');
-    const closeModalBtn = document.getElementById('closeModal');
-    const modalStats = document.getElementById('modalStats');
+    var deckEl = document.getElementById('deck');
+    var movesEl = document.getElementById('moves');
+    var timeEl = document.getElementById('time');
+    var pairsEl = document.getElementById('pairs');
+    var starsEl = document.getElementById('star-rating');
+    var restartBtn = document.getElementById('restart');
+    var restartBottom = document.getElementById('restart-bottom');
+    var hintBtn = document.getElementById('hint');
+    var modal = document.getElementById('modalOverlay');
+    var playAgainBtn = document.getElementById('playAgain');
+    var closeModalBtn = document.getElementById('closeModal');
+    var modalStats = document.getElementById('modalStats');
+    var themeToggle = document.getElementById('themeToggle');
+    var moonIcon = document.getElementById('moonIcon');
+    var sunIcon = document.getElementById('sunIcon');
 
-    // Game state
-    let deck = [];
-    let opened = []; 
-    
-    let matched = 0;
-    let moves = 0;
-    let starCount = 3;
-    let timerId = null;
-    let seconds = 0;
-    let minutes = 0;
-    let started = false;
+    var deck = [];
+    var opened = []; 
+    var matched = 0;
+    var moves = 0;
+    var starCount = 3;
+    var timerId = null;
+    var seconds = 0;
+    var minutes = 0;
+    var started = false;
+
+    themeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('light-mode');
+      var isLight = document.body.classList.contains('light-mode');
+      moonIcon.classList.toggle('hidden', !isLight);
+      sunIcon.classList.toggle('hidden', isLight);
+    });
 
     function shuffle(a){
-      for(let i=a.length-1;i>0;i--){
-        const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];
+      for(var i=a.length-1;i>0;i--){
+        var j=Math.floor(Math.random()*(i+1));
+        var temp=a[i];a[i]=a[j];a[j]=temp;
       }
       return a;
     }
 
     function formatTime(min,sec){
-      const mm = String(min).padStart(2,'0');
-      const ss = String(sec).padStart(2,'0');
-      return mm+':'+ss;
+      return String(min).padStart(2,'0')+':'+String(sec).padStart(2,'0');
     }
 
     function startTimer(){
       if(timerId) return;
-      timerId = setInterval(()=>{
+      timerId = setInterval(function(){
         seconds++;
         if(seconds>=60){minutes++;seconds=0}
         timeEl.textContent = formatTime(minutes,seconds);
       },1000)
     }
+
     function stopTimer(){
       if(timerId){clearInterval(timerId);timerId=null}
     }
+
     function resetTimer(){stopTimer();seconds=0;minutes=0;timeEl.textContent='00:00'}
 
     function buildDeck(){
       deckEl.innerHTML='';
       deck = shuffle(cardPool.slice());
-      deck.forEach((imgSrc, i) => {
-        const li = document.createElement('div');
+      for(var i=0;i<deck.length;i++){
+        var li = document.createElement('div');
         li.className = 'card';
         li.setAttribute('data-index', i);
-        li.setAttribute('data-src', imgSrc);
-        li.setAttribute('role','button');
-        li.setAttribute('tabindex','0');
-
-        li.innerHTML = `
-          <div class="card-inner">
-            <div class="card-face card-back" aria-hidden="false"><div class="logo">VT</div></div>
-            <div class="card-face card-front" aria-hidden="true"><img src="img/${imgSrc}" alt="Vault card"></div>
-          </div>`;
-
+        li.setAttribute('data-src', deck[i]);
+        li.innerHTML = '<div class="card-inner"><div class="card-face card-back"><div class="logo">VT</div></div><div class="card-face card-front"><img src="img/' + deck[i] + '" alt="Vault card"></div></div>';
         deckEl.appendChild(li);
-      });
+      }
     }
 
     function resetGame(){
@@ -354,140 +567,114 @@
       starCount = 3;
       updateUI();
       started = false;
-     
-      
-      Array.from(starsEl.children).forEach((s,i)=>s.classList.remove('star--lost'));
+      var stars = starsEl.children;
+      for(var i=0;i<stars.length;i++){
+        stars[i].classList.remove('star--lost');
+      }
     }
 
     function updateUI(){
       movesEl.textContent = moves;
-      pairsEl.textContent = `${matched} / 8`;
-  
-      
+      pairsEl.textContent = matched + ' / 8';
       if(moves <= 12){ starCount = 3 }
       else if(moves <= 18){ starCount = 2 }
       else { starCount = 1 }
-      Array.from(starsEl.children).forEach((el,idx)=>{
-        if(idx+1 > starCount) el.classList.add('star--lost'); else el.classList.remove('star--lost')
-      });
+      var stars = starsEl.children;
+      for(var i=0;i<stars.length;i++){
+        if(i+1 > starCount) stars[i].classList.add('star--lost');
+        else stars[i].classList.remove('star--lost');
+      }
     }
 
-    
-    
-    deckEl.addEventListener('click', (e)=>{
-      const card = e.target.closest('.card');
+    deckEl.addEventListener('click', function(e){
+      var card = e.target.closest('.card');
       if(!card) return;
       onCardClick(card);
-    });
-
-   
-    deckEl.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter' || e.key === ' '){
-        const card = e.target.closest('.card');
-        if(!card) return; e.preventDefault(); onCardClick(card);
-      }
     });
 
     function onCardClick(card){
       if(card.classList.contains('is-flip') || card.classList.contains('matched')) return;
       if(!started){started=true;startTimer()}
-
-      
       card.classList.add('is-flip');
-      const frontImg = card.querySelector('.card-front img');
       opened.push(card);
-
       if(opened.length === 2){
         moves++;
         updateUI();
-        
         deckEl.style.pointerEvents = 'none';
-        const a = opened[0].getAttribute('data-src');
-        const b = opened[1].getAttribute('data-src');
+        var a = opened[0].getAttribute('data-src');
+        var b = opened[1].getAttribute('data-src');
         if(a === b){
-          // matched
-          setTimeout(()=>{
-            opened.forEach(c=>{c.classList.add('matched'); c.querySelector('.card-inner').style.boxShadow='0 8px 30px rgba(33,150,243,0.12)'});
+          setTimeout(function(){
+            for(var i=0;i<opened.length;i++){
+              opened[i].classList.add('matched');
+            }
             matched += 2;
             opened = [];
             deckEl.style.pointerEvents = '';
             updateUI();
-            checkWin();
+            if(matched === 16){
+              stopTimer();
+              showWinModal();
+            }
           },550);
         } else {
-          setTimeout(()=>{
-            opened.forEach(c=>c.classList.remove('is-flip'));
+          setTimeout(function(){
+            for(var i=0;i<opened.length;i++){
+              opened[i].classList.remove('is-flip');
+            }
             opened = [];
             deckEl.style.pointerEvents = '';
-            updateUI();
           },700);
         }
       }
     }
 
-    function checkWin(){
-      if(matched === 16){
-        stopTimer();
-        showWinModal();
-      }
-    }
-
     function showWinModal(){
-      modal.setAttribute('aria-hidden','false');
       modal.style.display = 'flex';
-      // populate stats
       modalStats.innerHTML = '';
-      const s1 = statCard('Time', formatTime(minutes,seconds));
-      const s2 = statCard('Moves', moves);
-      const s3 = statCard('Stars', `${starCount} / 3`);
-      modalStats.appendChild(s1); modalStats.appendChild(s2); modalStats.appendChild(s3);
-      // small confetti effect (simple colored bars)
-      const conf = document.createElement('div');conf.className='confetti';
-      conf.innerHTML = generateConfetti();
-      modalStats.appendChild(conf);
-      // focus on play again for keyboard users
-      playAgainBtn.focus();
+      modalStats.innerHTML += '<div class="stat-card"><div style="font-size:0.78rem;color:#9fb6d9">Time</div><div style="font-weight:700;color:var(--vault-yellow);margin-top:6px">'+formatTime(minutes,seconds)+'</div></div>';
+      modalStats.innerHTML += '<div class="stat-card"><div style="font-size:0.78rem;color:#9fb6d9">Moves</div><div style="font-weight:700;color:var(--vault-yellow);margin-top:6px">'+moves+'</div></div>';
+      modalStats.innerHTML += '<div class="stat-card"><div style="font-size:0.78rem;color:#9fb6d9">Stars</div><div style="font-weight:700;color:var(--vault-yellow);margin-top:6px">'+starCount+' / 3</div></div>';
     }
 
-    function generateConfetti(){
-      const colors = ['#ffd23f','#6fd3ff','#fff5cc','#9bd39b','#ffd9e0'];
-      let html='';
-      for(let i=0;i<14;i++){const w=6+Math.floor(Math.random()*18);const c=colors[Math.floor(Math.random()*colors.length)];html += `<div style="display:inline-block;width:${w}px;height:10px;margin:3px;border-radius:2px;background:${c}"></div>`}
-      return html;
-    }
-
-    function statCard(label, val){
-      const wrap = document.createElement('div');wrap.className='stat-card';
-      wrap.innerHTML = `<div style="font-size:0.78rem;color:#9fb6d9">${label}</div><div style="font-weight:700;color:var(--vault-yellow);margin-top:6px">${val}</div>`;
-      return wrap;
-    }
-
-    // Hint: reveal one matching pair for brief moment
-    hintBtn.addEventListener('click', ()=>{
-      // find two unmatched same-src
-      const nodes = Array.from(deckEl.querySelectorAll('.card:not(.matched):not(.is-flip)'));
+    hintBtn.addEventListener('click', function(){
+      var nodes = deckEl.querySelectorAll('.card:not(.matched):not(.is-flip)');
       if(nodes.length < 2) return;
-      const grouped = {};
-      nodes.forEach(n=>{const s=n.getAttribute('data-src'); (grouped[s] = grouped[s]||[]).push(n)});
-      const pairKey = Object.keys(grouped).find(k=>grouped[k].length>=2);
-      if(!pairKey) return;
-      const [c1,c2] = grouped[pairKey];
-      c1.classList.add('is-flip'); c2.classList.add('is-flip');
-      setTimeout(()=>{c1.classList.remove('is-flip'); c2.classList.remove('is-flip');},900);
+      var grouped = {};
+      for(var i=0;i<nodes.length;i++){
+        var s=nodes[i].getAttribute('data-src');
+        if(!grouped[s]) grouped[s]=[];
+        grouped[s].push(nodes[i]);
+      }
+      for(var key in grouped){
+        if(grouped[key].length>=2){
+          var c1=grouped[key][0];
+          var c2=grouped[key][1];
+          c1.classList.add('is-flip');
+          c2.classList.add('is-flip');
+          setTimeout(function(){
+            c1.classList.remove('is-flip');
+            c2.classList.remove('is-flip');
+          },900);
+          break;
+        }
+      }
     });
 
-    // Restart handlers
+
+
+    
     restartBtn.addEventListener('click', resetGame);
     restartBottom.addEventListener('click', resetGame);
-    playAgainBtn.addEventListener('click', ()=>{modal.style.display='none';modal.setAttribute('aria-hidden','true');resetGame();});
-    closeModalBtn.addEventListener('click', ()=>{modal.style.display='none';modal.setAttribute('aria-hidden','true')});
+    playAgainBtn.addEventListener('click', function(){
+      modal.style.display='none';
+      resetGame();
+    });
+    closeModalBtn.addEventListener('click', function(){
+      modal.style.display='none';
+    });
 
-    // initialize
     resetGame();
-
-    // accessibility: close modal on escape
-    document.addEventListener('keydown',(e)=>{if(e.key==='Escape' && modal.style.display==='flex'){modal.style.display='none';modal.setAttribute('aria-hidden','true')}})
   </script>
 </body>
-
 </html>

@@ -9,201 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <style>
-    :root{
-      --vault-blue:#052c6b; 
-      
-      --vault-yellow:#ffd23f; 
-      
-      --muted:#b6c2d8;
-      --panel:#0b1730;
-      --glass:rgba(255,255,255,0.04);
-      --card-back:#0a2340;
-      --accent-glow:0 6px 30px rgba(37,152,255,0.12);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      min-height:100%;
-      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 700px at 10% 10%, rgba(2,46,84,0.5), transparent),
-                  radial-gradient(900px 500px at 90% 90%, rgba(3,20,60,0.45), transparent),
-                  linear-gradient(180deg, #001021 0%, #021232 60%);
-      color:var(--muted);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:2.4rem;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-  
-    
-    .app{
-      width:100%;
-      max-width:1100px;
-      display:grid;
-      grid-template-columns:320px 1fr;
-      gap:2rem;
-      align-items:start;
-    }
-
-   
-    
-    .panel{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border:1px solid rgba(255,255,255,0.04);
-      border-radius:14px;
-      padding:1.6rem;
-      box-shadow:var(--accent-glow);
-      min-height:420px;
-    }
-
-    .brand{
-      display:flex;
-      gap:0.8rem;
-      align-items:center;
-      margin-bottom:1rem;
-    }
-    .vault-badge{
-      width:64px;height:64px;border-radius:12px;
-      background:linear-gradient(180deg,var(--vault-blue),#123a78);
-      display:flex;align-items:center;justify-content:center;
-      color:var(--vault-yellow);font-weight:700;font-family:'Share Tech Mono',monospace;
-      border:2px solid rgba(255,255,255,0.06);
-      box-shadow:0 6px 24px rgba(17,68,128,0.25), inset 0 -8px 20px rgba(0,0,0,0.4);
-      font-size:1.6rem;
-    }
-
-    h1.title{
-      font-size:1.35rem;margin:0;color:var(--vault-yellow);font-family:'Share Tech Mono',monospace;
-      letter-spacing:0.08rem;text-transform:uppercase;font-weight:700
-    }
-    .subtitle{font-size:0.92rem;color:var(--muted);margin-top:0.35rem}
-
-    .score-box{margin-top:1.4rem;background:var(--panel);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
-
-    .score-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem}
-    .score-row .label{font-size:0.86rem;color:var(--muted)}
-    .score-big{font-weight:700;color:var(--vault-yellow);font-size:1.4rem}
-
-    .stars{display:flex;gap:0.4rem;align-items:center}
-    .star{width:40px;height:32px;border-radius:6px;background:linear-gradient(180deg,var(--vault-yellow),#f7c84b);display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#00142b}
-    .star--lost{opacity:0.18;filter:grayscale(1)}
-
-    .timer-panel{display:flex;gap:0.6rem;align-items:center}
-    .timer-value{background:linear-gradient(90deg,#021a43, #06254f);padding:0.45rem 0.8rem;border-radius:8px;color:var(--muted);font-family:'Share Tech Mono',monospace}
-
-    .controls{display:flex;gap:0.6rem;margin-top:1rem}
-    .btn{
-      border:none;padding:0.6rem 0.9rem;border-radius:10px;cursor:pointer;font-weight:600;
-      background:linear-gradient(180deg,var(--vault-yellow),#f0c33a);color:#021021;box-shadow:0 6px 18px rgba(0,0,0,0.35);
-    }
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
-
-    .hint{margin-top:1rem;font-size:0.84rem;color:#9fb6d9}
-
-    
-    
-    .game{
-      padding:1.2rem;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border:1px solid rgba(255,255,255,0.03);min-height:420px;display:flex;flex-direction:column;align-items:center;gap:1rem
-    }
-
-    .top-row{width:100%;display:flex;align-items:center;justify-content:space-between}
-    .progress{font-family:'Share Tech Mono',monospace;color:var(--muted);font-size:0.9rem}
-
-   
-    
-    .deck{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;max-width:720px;padding:1rem;align-content:center;
-      justify-items:center;justify-content:center;
-    }
-
-    .card{
-      width:140px;height:140px;border-radius:12px;perspective:1000px;user-select:none;position:relative;
-    }
-    .card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.9,.2,1)}
-    .card.is-flip .card-inner{transform:rotateY(180deg)}
-
-    .card-face{position:absolute;inset:0;border-radius:12px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;border:1px solid rgba(255,255,255,0.03)}
-
-    .card-back{background:linear-gradient(180deg,var(--card-back),#041a37);box-shadow:inset 0 -8px 30px rgba(0,0,0,0.6);}
-    .card-back .logo{font-family:'Share Tech Mono',monospace;color:var(--vault-yellow);font-weight:700;font-size:1.4rem}
-
-    .card-front{transform:rotateY(180deg);background:#ffffff;border:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center}
-    .card-front img{max-width:84%;max-height:84%;display:block;border-radius:6px}
-
-    .card.match .card-inner{animation:matchPulse .9s ease-in-out 1}
-    @keyframes matchPulse{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
-
-  
-  
-    .modal-overlay{position:fixed;inset:0;background:rgba(1,6,12,0.6);display:none;align-items:center;justify-content:center;z-index:30}
-    .modal-box{background:linear-gradient(180deg,#061a35,#03203d);padding:2rem;border-radius:12px;border:1px solid rgba(255,255,255,0.06);width:min(580px,94%);color:var(--muted);box-shadow:0 20px 60px rgba(2,16,40,0.7)}
-    .modal-box h2{color:var(--vault-yellow);font-family:'Share Tech Mono',monospace;margin:0 0 0.6rem}
-    .modal-stats{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
-    .stat-card{background:rgba(255,255,255,0.02);padding:0.8rem;border-radius:8px;border:1px solid rgba(255,255,255,0.02);min-width:120px}
-
-    .confetti{height:80px;margin-top:0.6rem}
-
-  
-  
-    @media (max-width:900px){
-      .app{grid-template-columns:1fr;max-width:920px}
-      .panel{order:2}
-      .game{order:1}
-      .deck{grid-template-columns:repeat(4,1fr);gap:12px}
-      .card{width:110px;height:110px}
-    }
-
-    @media (max-width:480px){
-      .deck{grid-template-columns:repeat(2,1fr)}
-      .card{width:98px;height:98px}
-      .panel{min-height:auto}
-    }
-
-    .page2{
-      display: flex;
-      justify-content: space-around;
-    }
-
-    #tt{
-      font-weight: 900;
-      color: #f9cb48;
-    }
-
-    .right img{
-      height: 30px;
-      width: 30px;
-      border-radius: 50%;
-    }
- .page3{
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .page3 a {
-      text-decoration: none;
-      color: grey;
-      font-size: 14px;
-    }
-
-  .page3 .two{
-
-  }
-   
-  </style>
+  <link rel="stylesheet" href="src/css/styles.css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="page1">
   <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
     <aside class="panel" aria-hidden="false">
       <div class="brand">
@@ -223,6 +32,7 @@
           <div>
             <div class="label">Time</div>
             <div class="score-big" id="time">00:00</div>
+            <div class="timer-bar" aria-hidden="true"><div id="timerBar" class="timer-bar-fill"></div></div>
           </div>
         </div>
 
@@ -259,7 +69,12 @@
     <main class="game">
       <div class="top-row">
         <div class="progress">Find all pairs — Good luck, Vault Dweller.</div>
-        <div style="font-family:'Share Tech Mono',monospace;color:var(--muted)">Difficulty: <strong style="color:var(--vault-yellow)">Medium</strong></div>
+        <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
+          <div style="color:var(--muted)">Difficulty:</div>
+          <button class="btn difficulty-btn" data-diff="easy">Easy</button>
+          <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
+          <button class="btn difficulty-btn" data-diff="hard">Hard</button>
+        </div>
       </div>
 
       <section class="deck" id="deck" aria-live="polite" aria-label="Game cards"></section>
@@ -270,18 +85,30 @@
 
     </main>
   </div>
+  <div class="page-container">
 
+    <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
+      </div>
 
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="vault-badge vault-badge--small">VT</div>
+          <span>Vault-Tec Memory Trainer | Pip-Boy Edition</span>
+        </div>
+        <div class="footer-info">
+          Designed & Built for Educational Purposes
+        </div>
+      </div>
+    </footer>
+  </div> 
   
   <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-box" role="document">
-      <h2>CONGRATULATIONS, Vault Dweller</h2>
-      <div class="subtitle">You matched all pairs — Vault‑Tec is proud.</div>
+      <h2 id="modalTitle"></h2>
+      <div class="subtitle" id="modalMessage"></div>
 
-      <div class="modal-stats" id="modalStats">
-       
-        
-      </div>
+      <div class="modal-stats" id="modalStats"></div>
 
       <div style="display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end">
         <button class="btn ghost" id="closeModal">Close</button>
@@ -289,268 +116,7 @@
       </div>
     </div>
   </div>
-    </div>
-    
-<hr>
-    <div class="page2">
-    
-     <div class="left">
-      Copyright © 2025 <span id="tt">Vault Dweller</span>
-
-     </div>
-     <div class="right"><img src="https://imgs.search.brave.com/YUTURIG0UHhkLUCzERj_PDI6y9MgWngdcAUwlPeuHaI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMjE5/Mzc2OTAyNS92ZWN0/b3IvaW5kaWFuLWZs/YWctdmVjdG9yLmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz1P/TFdMOTBsR1VnTnJM/T3d2bnU3WnhISG5a/OEd2VmNjVktNeFg4/UkpRUEVVPQ" alt="flagimg" >
-      India</div>
-
-    </div>
-    <br>
-    <div class="page3">
-      <div class="one"><a href="#">Help Centre |</a>
-      <a href="#">Jobs |</a>
-      <a href="#">Terms & Conditions |</a>
-      <a href="#">Privacy Policy</a></div>
-
-      <div class="two">
-        
-      <a href="#"><i class="fa-brands fa-square-linkedin fa-lg"></i></a>
-      <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
-      <a href="#"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-      <a href="#"><i class="fa-brands fa-snapchat fa-lg"></i></a>
- 
-      </div>
-    </div>
-  </div>
-  <script>
-   
-   
-    const cardPool = [
-      'Agility.png','Agility.png',
-      'Boat.png','Boat.png',
-      'Citizenship.png','Citizenship.png',
-      'Hack.png','Hack.png',
-      'Nerd-Rage.png','Nerd-Rage.png',
-      'Nuka-Cola.png','Nuka-Cola.png',
-      'Robotics.png','Robotics.png',
-      'Shock.png','Shock.png'
-    ];
-
-   
-    
-    const deckEl = document.getElementById('deck');
-    const movesEl = document.getElementById('moves');
-    const timeEl = document.getElementById('time');
-    const pairsEl = document.getElementById('pairs');
-    const starsEl = document.getElementById('star-rating');
-    const restartBtn = document.getElementById('restart');
-    const restartBottom = document.getElementById('restart-bottom');
-    const hintBtn = document.getElementById('hint');
-    const modal = document.getElementById('modalOverlay');
-    const playAgainBtn = document.getElementById('playAgain');
-    const closeModalBtn = document.getElementById('closeModal');
-    const modalStats = document.getElementById('modalStats');
-
-    // Game state
-    let deck = [];
-    let opened = []; 
-    
-    let matched = 0;
-    let moves = 0;
-    let starCount = 3;
-    let timerId = null;
-    let seconds = 0;
-    let minutes = 0;
-    let started = false;
-
-    function shuffle(a){
-      for(let i=a.length-1;i>0;i--){
-        const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];
-      }
-      return a;
-    }
-
-    function formatTime(min,sec){
-      const mm = String(min).padStart(2,'0');
-      const ss = String(sec).padStart(2,'0');
-      return mm+':'+ss;
-    }
-
-    function startTimer(){
-      if(timerId) return;
-      timerId = setInterval(()=>{
-        seconds++;
-        if(seconds>=60){minutes++;seconds=0}
-        timeEl.textContent = formatTime(minutes,seconds);
-      },1000)
-    }
-    function stopTimer(){
-      if(timerId){clearInterval(timerId);timerId=null}
-    }
-    function resetTimer(){stopTimer();seconds=0;minutes=0;timeEl.textContent='00:00'}
-
-    function buildDeck(){
-      deckEl.innerHTML='';
-      deck = shuffle(cardPool.slice());
-      deck.forEach((imgSrc, i) => {
-        const li = document.createElement('div');
-        li.className = 'card';
-        li.setAttribute('data-index', i);
-        li.setAttribute('data-src', imgSrc);
-        li.setAttribute('role','button');
-        li.setAttribute('tabindex','0');
-
-        li.innerHTML = `
-          <div class="card-inner">
-            <div class="card-face card-back" aria-hidden="false"><div class="logo">VT</div></div>
-            <div class="card-face card-front" aria-hidden="true"><img src="img/${imgSrc}" alt="Vault card"></div>
-          </div>`;
-
-        deckEl.appendChild(li);
-      });
-    }
-
-    function resetGame(){
-      stopTimer();
-      resetTimer();
-      buildDeck();
-      opened = [];
-      matched = 0;
-      moves = 0;
-      starCount = 3;
-      updateUI();
-      started = false;
-     
-      
-      Array.from(starsEl.children).forEach((s,i)=>s.classList.remove('star--lost'));
-    }
-
-    function updateUI(){
-      movesEl.textContent = moves;
-      pairsEl.textContent = `${matched} / 8`;
-  
-      
-      if(moves <= 12){ starCount = 3 }
-      else if(moves <= 18){ starCount = 2 }
-      else { starCount = 1 }
-      Array.from(starsEl.children).forEach((el,idx)=>{
-        if(idx+1 > starCount) el.classList.add('star--lost'); else el.classList.remove('star--lost')
-      });
-    }
-
-    
-    
-    deckEl.addEventListener('click', (e)=>{
-      const card = e.target.closest('.card');
-      if(!card) return;
-      onCardClick(card);
-    });
-
-   
-    deckEl.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter' || e.key === ' '){
-        const card = e.target.closest('.card');
-        if(!card) return; e.preventDefault(); onCardClick(card);
-      }
-    });
-
-    function onCardClick(card){
-      if(card.classList.contains('is-flip') || card.classList.contains('matched')) return;
-      if(!started){started=true;startTimer()}
-
-      
-      card.classList.add('is-flip');
-      const frontImg = card.querySelector('.card-front img');
-      opened.push(card);
-
-      if(opened.length === 2){
-        moves++;
-        updateUI();
-        
-        deckEl.style.pointerEvents = 'none';
-        const a = opened[0].getAttribute('data-src');
-        const b = opened[1].getAttribute('data-src');
-        if(a === b){
-          // matched
-          setTimeout(()=>{
-            opened.forEach(c=>{c.classList.add('matched'); c.querySelector('.card-inner').style.boxShadow='0 8px 30px rgba(33,150,243,0.12)'});
-            matched += 2;
-            opened = [];
-            deckEl.style.pointerEvents = '';
-            updateUI();
-            checkWin();
-          },550);
-        } else {
-          setTimeout(()=>{
-            opened.forEach(c=>c.classList.remove('is-flip'));
-            opened = [];
-            deckEl.style.pointerEvents = '';
-            updateUI();
-          },700);
-        }
-      }
-    }
-
-    function checkWin(){
-      if(matched === 16){
-        stopTimer();
-        showWinModal();
-      }
-    }
-
-    function showWinModal(){
-      modal.setAttribute('aria-hidden','false');
-      modal.style.display = 'flex';
-      // populate stats
-      modalStats.innerHTML = '';
-      const s1 = statCard('Time', formatTime(minutes,seconds));
-      const s2 = statCard('Moves', moves);
-      const s3 = statCard('Stars', `${starCount} / 3`);
-      modalStats.appendChild(s1); modalStats.appendChild(s2); modalStats.appendChild(s3);
-      // small confetti effect (simple colored bars)
-      const conf = document.createElement('div');conf.className='confetti';
-      conf.innerHTML = generateConfetti();
-      modalStats.appendChild(conf);
-      // focus on play again for keyboard users
-      playAgainBtn.focus();
-    }
-
-    function generateConfetti(){
-      const colors = ['#ffd23f','#6fd3ff','#fff5cc','#9bd39b','#ffd9e0'];
-      let html='';
-      for(let i=0;i<14;i++){const w=6+Math.floor(Math.random()*18);const c=colors[Math.floor(Math.random()*colors.length)];html += `<div style="display:inline-block;width:${w}px;height:10px;margin:3px;border-radius:2px;background:${c}"></div>`}
-      return html;
-    }
-
-    function statCard(label, val){
-      const wrap = document.createElement('div');wrap.className='stat-card';
-      wrap.innerHTML = `<div style="font-size:0.78rem;color:#9fb6d9">${label}</div><div style="font-weight:700;color:var(--vault-yellow);margin-top:6px">${val}</div>`;
-      return wrap;
-    }
-
-    // Hint: reveal one matching pair for brief moment
-    hintBtn.addEventListener('click', ()=>{
-      // find two unmatched same-src
-      const nodes = Array.from(deckEl.querySelectorAll('.card:not(.matched):not(.is-flip)'));
-      if(nodes.length < 2) return;
-      const grouped = {};
-      nodes.forEach(n=>{const s=n.getAttribute('data-src'); (grouped[s] = grouped[s]||[]).push(n)});
-      const pairKey = Object.keys(grouped).find(k=>grouped[k].length>=2);
-      if(!pairKey) return;
-      const [c1,c2] = grouped[pairKey];
-      c1.classList.add('is-flip'); c2.classList.add('is-flip');
-      setTimeout(()=>{c1.classList.remove('is-flip'); c2.classList.remove('is-flip');},900);
-    });
-
-    // Restart handlers
-    restartBtn.addEventListener('click', resetGame);
-    restartBottom.addEventListener('click', resetGame);
-    playAgainBtn.addEventListener('click', ()=>{modal.style.display='none';modal.setAttribute('aria-hidden','true');resetGame();});
-    closeModalBtn.addEventListener('click', ()=>{modal.style.display='none';modal.setAttribute('aria-hidden','true')});
-
-    // initialize
-    resetGame();
-
-    // accessibility: close modal on escape
-    document.addEventListener('keydown',(e)=>{if(e.key==='Escape' && modal.style.display==='flex'){modal.style.display='none';modal.setAttribute('aria-hidden','true')}})
-  </script>
+  <script src="src/js/app.js"></script>
 </body>
 
 </html>

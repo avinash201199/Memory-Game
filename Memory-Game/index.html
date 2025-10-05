@@ -56,9 +56,21 @@
           <button class="btn" id="restart">Restart</button>
           <button class="btn ghost" id="hint">Reveal 1 Pair</button>
           <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
+          <button class="btn ghost" id="playDemo">Play Demo</button>
         </div>
 
         <div class="hint">Tip: Try to remember positions — the Pip‑Boy rewards patience.</div>
+      
+        <!-- Leaderboard (moved into score-box to avoid overlap) -->
+        <div style="margin-top:0.9rem">
+          <div class="label">Leaderboard — Top 5</div>
+          <div id="leaderboardList" class="lb-list"></div>
+          <div class="lb-controls">
+            <button class="btn ghost" id="exportLb">Export</button>
+            <button class="btn ghost" id="shareLb">Share</button>
+            <button class="btn ghost" id="clearLb">Clear</button>
+          </div>
+        </div>
       </div>
 
       <div style="margin-top:1rem;font-size:0.85rem;color:#89a6cf;display:flex;gap:0.6rem;align-items:center">
@@ -66,19 +78,8 @@
         <div>Designed with Vault‑Tec aesthetics — blue panels, bold yellow accents and terminal fonts.</div>
       </div>
     </aside>
-    <!-- Leaderboard modal-like panel (small) -->
-    <aside class="panel" aria-hidden="false" style="max-width:320px;margin-left:0.6rem">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div class="label">Leaderboard</div>
-        <div style="font-size:0.8rem;color:var(--muted)">Top 5</div>
-      </div>
-      <div id="leaderboardList" style="margin-top:0.8rem;display:flex;flex-direction:column;gap:0.45rem"></div>
-      <div style="display:flex;gap:0.5rem;margin-top:0.8rem">
-        <button class="btn ghost" id="exportLb">Export</button>
-        <button class="btn ghost" id="shareLb">Share</button>
-        <button class="btn ghost" id="clearLb">Clear</button>
-      </div>
-    </aside>
+    <!-- Leaderboard panel (moved into left score box to avoid layout overlap) -->
+    <!-- leaderboard placeholder inserted inside .score-box by markup below -->
 
     <main class="game">
       <div class="top-row">

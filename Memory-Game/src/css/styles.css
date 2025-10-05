@@ -48,6 +48,8 @@ body {
   padding: 1.6rem;
   box-shadow: var(--accent-glow);
   min-height: 420px;
+  position: relative;
+  z-index: 50; /* ensure left panel floats above the game area */
 }
 
 .panel.leaderboard {
@@ -105,6 +107,8 @@ h1.title {
   padding: 1rem;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.03);
+  overflow: visible; /* allow stars and small popups to overflow */
+  z-index: 60;
 }
 
 .score-row {
@@ -129,6 +133,8 @@ h1.title {
   display: flex;
   gap: 0.4rem;
   align-items: center;
+  position: relative;
+  z-index: 70;
 }
 
 .star {
@@ -141,6 +147,7 @@ h1.title {
   justify-content: center;
   font-weight: 700;
   color: #00142b;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
 
 .star--lost {
@@ -183,6 +190,11 @@ h1.title {
   display: flex;
   gap: 0.6rem;
   margin-top: 1rem;
+}
+
+.btn.ghost#playDemo {
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px dashed rgba(255,255,255,0.04);
 }
 
 /* confetti canvas covers the main area when active */
@@ -239,6 +251,7 @@ h1.title {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  z-index: 1; /* keep the game under the left panel */
 }
 
 .top-row {
@@ -273,6 +286,7 @@ h1.title {
   perspective: 1000px;
   user-select: none;
   position: relative;
+  z-index: 1;
 }
 
 .card-inner {
@@ -419,6 +433,7 @@ h1.title {
     width: 110px;
     height: 110px;
   }
+  .star { width: 34px; height: 28px; }
 }
 
 @media (max-width: 480px) {

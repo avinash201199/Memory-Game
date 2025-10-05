@@ -59,6 +59,7 @@
   const exportBtn = document.getElementById('exportLb');
   const shareBtn = document.getElementById('shareLb');
   const clearBtn = document.getElementById('clearLb');
+  const playDemoBtn = document.getElementById('playDemo');
   let audioCtx = null;
   let isMuted = false;
 
@@ -412,6 +413,41 @@
     if(!confirm('Clear leaderboard for ' + selectedDifficulty + '?')) return;
     localStorage.removeItem(lbKey(selectedDifficulty)); renderLeaderboard();
   });
+
+  // in-page demo playback (no external recording needed)
+  async function playDemo(){
+    if(!playDemoBtn) return;
+    playDemoBtn.disabled = true; locked = true;
+    resetGame(); // start fresh
+    await new Promise(r=>setTimeout(r, 400));
+    // flip a handful of random cards
+    const cards = Array.from(deckEl.querySelectorAll('.card'));
+    for(let i=0;i<6 && i<cards.length;i++){
+      const c = cards[Math.floor(Math.random()*cards.length)];
+      c.focus(); c.click(); await new Promise(r=>setTimeout(r, 350));
+    }
+    // use hint if available
+    if(hintBtn.style.display !== 'none'){ hintBtn.click(); await new Promise(r=>setTimeout(r, 900)); }
+    // change difficulty to hard then back to medium to show UI
+    const hardBtn = diffControls.querySelector('button[data-diff="hard"]');
+    const medBtn = diffControls.querySelector('button[data-diff="medium"]');
+    if(hardBtn){ hardBtn.click(); await new Promise(r=>setTimeout(r, 600)); }
+    if(medBtn){ medBtn.click(); await new Promise(r=>setTimeout(r, 600)); }
+
+    // quickly match all pairs by clicking known pairs
+    const mapping = {};
+    Array.from(deckEl.querySelectorAll('.card')).forEach((el)=>{ const s = el.getAttribute('data-src'); (mapping[s]=mapping[s]||[]).push(el); });
+    for(const key of Object.keys(mapping)){
+      const pair = mapping[key];
+      if(pair.length>=2){ pair[0].click(); await new Promise(r=>setTimeout(r,120)); pair[1].click(); await new Promise(r=>setTimeout(r,220)); }
+    }
+    // small pause to show win modal/confetti
+    await new Promise(r=>setTimeout(r, 900));
+    // close modal and reset
+    if(playAgainBtn) playAgainBtn.click();
+    playDemoBtn.disabled = false; locked = false;
+  }
+  if(playDemoBtn) playDemoBtn.addEventListener('click', ()=>{ playDemo(); });
 
   // init
   resetGame();

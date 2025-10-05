@@ -50,6 +50,16 @@ body {
   min-height: 420px;
 }
 
+.panel.leaderboard {
+  max-width: 320px;
+  margin-left: 0.6rem;
+}
+
+.lb-list { margin-top: 0.8rem; display:flex; flex-direction:column; gap:0.45rem }
+.lb-row { display:flex; justify-content:space-between; gap:0.6rem; padding:0.45rem; border-radius:8px; background:rgba(255,255,255,0.02); font-size:0.92rem }
+.lb-controls { display:flex; gap:0.5rem; margin-top:0.8rem }
+.muted-note { color:var(--muted); font-size:0.85rem }
+
 .brand {
   display: flex;
   gap: 0.8rem;
@@ -173,6 +183,21 @@ h1.title {
   display: flex;
   gap: 0.6rem;
   margin-top: 1rem;
+}
+
+/* confetti canvas covers the main area when active */
+#confettiCanvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  display: none;
+}
+
+/* accessible focus style for mute button */
+#mute:focus, #mute[aria-pressed="true"] {
+  outline: 3px solid rgba(255, 210, 63, 0.35);
+  outline-offset: 2px;
 }
 
 .btn {
@@ -301,7 +326,7 @@ h1.title {
   border-radius: 6px;
 }
 
-.card.match .card-inner {
+.card.matched .card-inner {
   animation: matchPulse .9s ease-in-out 1;
 }
 

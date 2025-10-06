@@ -9,8 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+  <link rel="stylesheet" href="src/css/styles.css">
   <style>
     :root{
       --vault-blue:#052c6b; 
@@ -201,8 +203,6 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="page1">
   <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
     <aside class="panel" aria-hidden="false">
       <div class="brand">
@@ -222,6 +222,7 @@
           <div>
             <div class="label">Time</div>
             <div class="score-big" id="time">00:00</div>
+            <div class="timer-bar" aria-hidden="true"><div id="timerBar" class="timer-bar-fill"></div></div>
           </div>
         </div>
 
@@ -259,7 +260,12 @@
     <main class="game">
       <div class="top-row">
         <div class="progress">Find all pairs — Good luck, Vault Dweller.</div>
-        <div style="font-family:'Share Tech Mono',monospace;color:var(--muted)">Difficulty: <strong style="color:var(--vault-yellow)">Medium</strong></div>
+        <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
+          <div style="color:var(--muted)">Difficulty:</div>
+          <button class="btn difficulty-btn" data-diff="easy">Easy</button>
+          <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
+          <button class="btn difficulty-btn" data-diff="hard">Hard</button>
+        </div>
       </div>
 
       <section class="deck" id="deck" aria-live="polite" aria-label="Game cards" ></section> <!--actual play cards-->
@@ -270,18 +276,30 @@
 
     </main>
   </div>
+  <div class="page-container">
 
+    <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
+      </div>
 
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="vault-badge vault-badge--small">VT</div>
+          <span>Vault-Tec Memory Trainer | Pip-Boy Edition</span>
+        </div>
+        <div class="footer-info">
+          Designed & Built for Educational Purposes
+        </div>
+      </div>
+    </footer>
+  </div> 
   
   <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-box" role="document">
-      <h2>CONGRATULATIONS, Vault Dweller</h2>
-      <div class="subtitle">You matched all pairs — Vault‑Tec is proud.</div>
+      <h2 id="modalTitle"></h2>
+      <div class="subtitle" id="modalMessage"></div>
 
-      <div class="modal-stats" id="modalStats">
-       
-        
-      </div>
+      <div class="modal-stats" id="modalStats"></div>
 
       <div style="display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end">
         <button class="btn ghost" id="closeModal">Close</button>
@@ -565,6 +583,8 @@ modeBtn.addEventListener('click', ()=>{
     // accessibility: close modal on escape
     document.addEventListener('keydown',(e)=>{if(e.key==='Escape' && modal.style.display==='flex'){modal.style.display='none';modal.setAttribute('aria-hidden','true')}})
   </script>
+
+  <script src="src/js/app.js"></script>
 </body>
 
 </html>

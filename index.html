@@ -58,6 +58,17 @@
         </div>
 
         <div class="hint">Tip: Try to remember positions — the Pip‑Boy rewards patience.</div>
+        
+        <!-- Leaderboard (top-5 per difficulty) -->
+        <div style="margin-top:0.8rem">
+          <div class="label">Leaderboard</div>
+          <div class="lb-list" id="leaderboardList"></div>
+          <div class="lb-controls">
+            <button class="btn ghost" id="exportLb">Export</button>
+            <button class="btn ghost" id="shareLb">Share</button>
+            <button class="btn ghost" id="clearLb">Clear</button>
+          </div>
+        </div>
       </div>
 
       <div style="margin-top:1rem;font-size:0.85rem;color:#89a6cf;display:flex;gap:0.6rem;align-items:center">
@@ -75,9 +86,18 @@
           <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
           <button class="btn difficulty-btn" data-diff="hard">Hard</button>
         </div>
+        
+        <!-- Small controls: Mute and Play Demo -->
+        <div style="display:flex;gap:0.5rem;align-items:center">
+          <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
+          <button class="btn ghost" id="playDemo">Play Demo</button>
+        </div>
       </div>
 
       <section class="deck" id="deck" aria-live="polite" aria-label="Game cards"></section>
+
+  <!-- confetti canvas used by the win animation -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
 
       <div style="width:100%;display:flex;align-items:center;justify-content:center">
         <button class="btn" id="restart-bottom">Restart Game</button>

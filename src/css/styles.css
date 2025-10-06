@@ -320,6 +320,30 @@ h1.title {
   }
 }
 
+/* Particle animation for matched cards */
+.match-particle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, var(--vault-yellow), #f7c84b);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000;
+  animation: particleBurst 0.8s ease-out forwards;
+  box-shadow: 0 0 8px rgba(255, 210, 63, 0.8);
+}
+
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;

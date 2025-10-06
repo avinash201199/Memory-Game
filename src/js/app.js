@@ -141,6 +141,32 @@
     }
   });
 
+
+  function createMatchParticles(card) {
+    const rect = card.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    
+    for (let i = 0; i < 12; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'match-particle';
+      particle.style.left = centerX + 'px';
+      particle.style.top = centerY + 'px';
+      
+      const angle = (Math.PI * 2 * i) / 12;
+      const distance = 60 + Math.random() * 40;
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance;
+      
+      particle.style.setProperty('--tx', tx + 'px');
+      particle.style.setProperty('--ty', ty + 'px');
+      
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 800);
+    }
+  }
+
   function onCardClick(card){
     if(card.classList.contains('is-flip') || card.classList.contains('matched')) return;
     if(!started){ started = true; startTimer(); }
@@ -153,6 +179,9 @@
       const srcA = a.getAttribute('data-src'), srcB = b.getAttribute('data-src');
       if(srcA === srcB){
         a.classList.add('matched'); b.classList.add('matched');
+        // Trigger particle effects on match
+        createMatchParticles(a);
+        createMatchParticles(b);
         matched += 2;
         opened = [];
         updateUI();

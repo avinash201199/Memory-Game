@@ -37,6 +37,10 @@
   const modalMessage = document.getElementById('modalMessage');
   const timerBarFill = document.getElementById('timerBar');
   const diffControls = document.getElementById('difficultyControls');
+  const openHighScoresBtn = document.getElementById('openHighScores');
+  const highScoresOverlay = document.getElementById('highScoresOverlay');
+  const highScoresContainer = document.getElementById('highScoresContainer');
+  const closeHighScoresBtn = document.getElementById('closeHighScores');
 
   // state
   let deck = [];
@@ -55,6 +59,7 @@
   const muteBtn = document.getElementById('mute');
   const bestScoreKey = (diff) => `vt_best_${diff}`;
   const lbKey = (diff) => `vt_lb_${diff}`;
+  const hsKey = 'vt_highscores_v1';
   const leaderboardList = document.getElementById('leaderboardList');
   const exportBtn = document.getElementById('exportLb');
   const shareBtn = document.getElementById('shareLb');
@@ -66,6 +71,79 @@
   // util
   function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a }
   function formatTime(min, sec){ return (min).toString().padStart(2,'0') + ':' + (sec).toString().padStart(2,'0') }
+  function parseTimeToSeconds(timeStr){
+    // expects MM:SS
+    if(typeof timeStr !== 'string' || !timeStr.includes(':')) return Infinity;
+    const [m, s] = timeStr.split(':').map(n=>parseInt(n,10));
+    if(Number.isNaN(m) || Number.isNaN(s)) return Infinity;
+    return m*60 + s;
+  }
+
+  // High score store helpers
+  function loadHighScores(){
+    try{
+      const raw = localStorage.getItem(hsKey);
+      const base = { easy:{time:null,moves:null,stars:null}, medium:{time:null,moves:null,stars:null}, hard:{time:null,moves:null,stars:null} };
+      if(!raw) return base;
+      const parsed = JSON.parse(raw);
+      return Object.assign(base, parsed);
+    }catch(e){
+      return { easy:{time:null,moves:null,stars:null}, medium:{time:null,moves:null,stars:null}, hard:{time:null,moves:null,stars:null} };
+    }
+  }
+  function saveHighScores(store){ localStorage.setItem(hsKey, JSON.stringify(store)); }
+
+  function isBetterScore(prev, current){
+    // prev/current like {time:'MM:SS'|null, moves:number|null, stars:number|null}
+    if(!prev) return true;
+    // Better if higher stars, or fewer moves at same stars, or faster time at same stars and moves
+    const prevStars = prev.stars ?? -1;
+    const curStars = current.stars ?? -1;
+    if(curStars > prevStars) return true;
+    if(curStars < prevStars) return false;
+    const prevMoves = (typeof prev.moves === 'number') ? prev.moves : Infinity;
+    const curMoves = (typeof current.moves === 'number') ? current.moves : Infinity;
+    if(curMoves < prevMoves) return true;
+    if(curMoves > prevMoves) return false;
+    const prevSec = parseTimeToSeconds(prev.time);
+    const curSec = parseTimeToSeconds(current.time);
+    return curSec < prevSec;
+  }
+
+  function compareAndUpdateScores(difficulty, current){
+    const store = loadHighScores();
+    const prev = store[difficulty];
+    if(isBetterScore(prev, current)){
+      store[difficulty] = { time: current.time, moves: current.moves, stars: current.stars };
+      saveHighScores(store);
+    }
+  }
+
+  function renderHighScoresTable(){
+    if(!highScoresContainer) return;
+    const store = loadHighScores();
+    const rows = ['easy','medium','hard'].map(diff=>{
+      const d = store[diff] || {};
+      const t = d.time || '—';
+      const m = (typeof d.moves === 'number') ? d.moves : '—';
+      const s = (typeof d.stars === 'number') ? d.stars : '—';
+      return `<tr><td style="text-transform:capitalize">${diff}</td><td>${t}</td><td>${m}</td><td>${s}★</td></tr>`;
+    }).join('');
+    highScoresContainer.innerHTML = `
+      <div class="stat-card" style="width:100%;overflow:auto">
+        <table style="width:100%;border-collapse:separate;border-spacing:0 8px">
+          <thead>
+            <tr>
+              <th style="text-align:left">Difficulty</th>
+              <th style="text-align:left">Best Time</th>
+              <th style="text-align:left">Best Moves</th>
+              <th style="text-align:left">Best Stars</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+  }
 
   // timer
   function startTimer(){
@@ -278,12 +356,14 @@
     // play win tone and confetti
     playTone(1200,0.18);
     fireConfetti();
-    // persist best score
+    // persist best score (legacy single best display)
     try{
-      const prev = JSON.parse(localStorage.getItem(bestScoreKey(selectedDifficulty)) || 'null');
       const record = { time: formatTime(Math.floor(elapsed/60), elapsed%60), moves, stars: starCount };
+      const prev = JSON.parse(localStorage.getItem(bestScoreKey(selectedDifficulty)) || 'null');
       const better = !prev || (moves < prev.moves) || (moves === prev.moves && elapsed < (prev.elapsed||Infinity));
       if(better) localStorage.setItem(bestScoreKey(selectedDifficulty), JSON.stringify(Object.assign({}, record, { elapsed })));
+      // new: persistent highs per difficulty
+      compareAndUpdateScores(selectedDifficulty, record);
     }catch(e){/* ignore */}
     showBestScore();
     // add to leaderboard
@@ -418,6 +498,19 @@
     if(!confirm('Clear leaderboard for ' + selectedDifficulty + '?')) return;
     localStorage.removeItem(lbKey(selectedDifficulty)); renderLeaderboard();
   });
+
+  // High Scores modal wiring
+  if(openHighScoresBtn){
+    openHighScoresBtn.addEventListener('click', ()=>{
+      renderHighScoresTable();
+      if(highScoresOverlay){ highScoresOverlay.style.display = 'flex'; highScoresOverlay.setAttribute('aria-hidden','false'); }
+    });
+  }
+  if(closeHighScoresBtn){
+    closeHighScoresBtn.addEventListener('click', ()=>{
+      if(highScoresOverlay){ highScoresOverlay.style.display = 'none'; highScoresOverlay.setAttribute('aria-hidden','true'); }
+    });
+  }
 
   // in-page demo playback (no external recording needed)
   async function playDemo(){

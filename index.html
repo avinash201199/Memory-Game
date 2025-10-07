@@ -64,6 +64,7 @@
           <div class="label">Leaderboard</div>
           <div class="lb-list" id="leaderboardList"></div>
           <div class="lb-controls">
+            <button class="btn ghost" id="openHighScores">High Scores</button>
             <button class="btn ghost" id="exportLb">Export</button>
             <button class="btn ghost" id="shareLb">Share</button>
             <button class="btn ghost" id="clearLb">Clear</button>
@@ -133,6 +134,20 @@
       <div style="display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end">
         <button class="btn ghost" id="closeModal">Close</button>
         <button class="btn" id="playAgain">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- High Scores Modal -->
+  <div class="modal-overlay" id="highScoresOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-box" role="document">
+      <h2>High Scores</h2>
+      <div class="subtitle">Best records per difficulty</div>
+      <div class="modal-stats" style="display:block">
+        <div id="highScoresContainer"></div>
+      </div>
+      <div style="display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end">
+        <button class="btn ghost" id="closeHighScores">Close</button>
       </div>
     </div>
   </div>

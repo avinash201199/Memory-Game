@@ -10,9 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
+  <link rel="stylesheet" href="src/css/theme-toggle.css">
+  <link rel="stylesheet" href="src/css/buttons.css">
+  <script src="src/js/theme.js" defer></script>
 </head>
 
-<body>
+<body onload="initTheme()">
   <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
     <aside class="panel" aria-hidden="false">
       <div class="brand">
@@ -21,6 +24,13 @@
           <h1 class="title">Vault‑Tec Memory</h1>
           <div class="subtitle">Pip‑Boy Training — Find all Tech Pairs</div>
         </div>
+      </div>
+
+      <div class="theme-toggle">
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
+          <span class="theme-icon light">☀️</span>
+          <span class="theme-icon dark">🌙</span>
+        </button>
       </div>
 
       <div class="score-box">

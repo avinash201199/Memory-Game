@@ -1,0 +1,120 @@
+.theme-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 0.8rem 0;
+  padding: 0 0.5rem;
+}
+
+.theme-toggle-btn {
+  background: var(--panel);
+  border: 2px solid var(--vault-yellow);
+  border-radius: 2rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: auto;
+  min-width: 4rem;
+  height: 2.5rem;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.theme-toggle-btn:hover {
+  box-shadow: var(--accent-glow);
+  transform: translateY(-2px);
+  border-color: var(--vault-yellow);
+  background: linear-gradient(to right bottom, var(--panel), rgba(var(--vault-blue-rgb), 0.8));
+}
+
+.theme-toggle-btn:hover .theme-icon {
+  animation: wiggle 0.5s ease;
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95) translateY(0);
+  box-shadow: var(--accent-glow-intense);
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-12deg); }
+  75% { transform: rotate(12deg); }
+}
+
+.theme-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Show/hide icons based on theme */
+[data-theme="light"] .theme-icon.light {
+  display: none;
+}
+
+[data-theme="light"] .theme-icon.dark {
+  display: flex;
+}
+
+.theme-icon.dark {
+  display: none;
+}
+
+.theme-icon.light {
+  display: flex;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-toggle {
+    margin: 0.6rem 0;
+  }
+  
+  .theme-toggle-btn {
+    padding: 0.35rem 0.7rem;
+    height: 2.2rem;
+    min-width: 3.5rem;
+  }
+  
+  .theme-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    margin: 0.5rem 0;
+  }
+  
+  .theme-toggle-btn {
+    padding: 0.3rem 0.6rem;
+    height: 2rem;
+    min-width: 3rem;
+    border-width: 1.5px;
+  }
+  
+  .theme-icon {
+    font-size: 0.9rem;
+  }
+}
+
+/* Prevent text selection on button */
+.theme-toggle-btn {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Improve touch interaction on mobile */
+@media (hover: none) {
+  .theme-toggle-btn:hover {
+    box-shadow: none;
+  }
+}

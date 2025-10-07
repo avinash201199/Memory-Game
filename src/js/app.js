@@ -223,9 +223,20 @@
     }
   });
 
+// Safety check to prevent stuck or excess flipped cards
+function ensureFlip() {
+  const flippedCards = document.querySelectorAll('.is-flip');
+  if (flippedCards.length > 2) {
+    flippedCards.forEach(card => card.classList.remove('is-flip'));
+    return true;
+  }
+  return false;
+}
+
   function onCardClick(card){
     if(locked) return;
     if(card.classList.contains('is-flip') || card.classList.contains('matched')) return;
+    if (ensureFlip()) return; // Ensure no more than 2 cards are flipped
     if(!started){ started = true; startTimer(); }
     card.classList.add('is-flip');
     playTone(600, 0.06);

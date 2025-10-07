@@ -430,6 +430,21 @@ h1.title {
   margin: 0 0 0.6rem;
 }
 
+/* High Scores table styles (inherits Pip-Boy theme) */
+#highScoresContainer table th,
+#highScoresContainer table td {
+  padding: 8px 10px;
+}
+#highScoresContainer table thead th {
+  color: var(--vault-yellow);
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 700;
+}
+#highScoresContainer table tbody tr td {
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
 .modal-stats {
   display: flex;
   gap: 1rem;

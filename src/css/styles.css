@@ -1,13 +1,33 @@
 
 /*responsive issues are completely fixed by Gihan Harindra(GihanIT)*/
 :root {
+  /* Dark theme (default) */
   --vault-blue: #052c6b;
+  --vault-blue-rgb: 5, 44, 107;
   --vault-yellow: #ffd23f;
   --muted: #b6c2d8;
   --panel: #0b1730;
   --glass: rgba(255, 255, 255, 0.04);
   --card-back: #0a2340;
   --accent-glow: 0 6px 30px rgba(37, 152, 255, 0.12);
+  --accent-glow-intense: 0 8px 35px rgba(37, 152, 255, 0.25);
+  --bg-gradient-start: #001021;
+  --bg-gradient-end: #021232;
+}
+
+/* Light theme variables */
+[data-theme="light"] {
+  --vault-blue: #1a4d98;
+  --vault-blue-rgb: 26, 77, 152;
+  --vault-yellow: #ffc107;
+  --muted: #2c3e50;
+  --panel: #f8f9fa;
+  --glass: rgba(0, 0, 0, 0.04);
+  --card-back: #e9ecef;
+  --accent-glow: 0 6px 30px rgba(37, 152, 255, 0.2);
+  --accent-glow-intense: 0 8px 35px rgba(37, 152, 255, 0.35);
+  --bg-gradient-start: #f8f9fa;
+  --bg-gradient-end: #e9ecef;
 }
 
 * {
@@ -23,7 +43,7 @@ body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: radial-gradient(1200px 700px at 10% 10%, rgba(2, 46, 84, 0.5), transparent),
               radial-gradient(900px 500px at 90% 90%, rgba(3, 20, 60, 0.45), transparent),
-              linear-gradient(180deg, #001021 0%, #021232 60%);
+              linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 60%);
   color: var(--muted);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -360,6 +380,30 @@ h1.title {
   }
 }
 
+/* Particle animation for matched cards */
+.match-particle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, var(--vault-yellow), #f7c84b);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000;
+  animation: particleBurst 0.8s ease-out forwards;
+  box-shadow: 0 0 8px rgba(255, 210, 63, 0.8);
+}
+
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -384,6 +428,21 @@ h1.title {
   color: var(--vault-yellow);
   font-family: 'Share Tech Mono', monospace;
   margin: 0 0 0.6rem;
+}
+
+/* High Scores table styles (inherits Pip-Boy theme) */
+#highScoresContainer table th,
+#highScoresContainer table td {
+  padding: 8px 10px;
+}
+#highScoresContainer table thead th {
+  color: var(--vault-yellow);
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 700;
+}
+#highScoresContainer table tbody tr td {
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
 }
 
 .modal-stats {

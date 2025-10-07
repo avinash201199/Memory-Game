@@ -10,9 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
+  <link rel="stylesheet" href="src/css/theme-toggle.css">
+  <link rel="stylesheet" href="src/css/buttons.css">
+  <script src="src/js/theme.js" defer></script>
 </head>
 
-<body>
+<body onload="initTheme()">
   <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
     <aside class="panel" aria-hidden="false">
       <div class="brand">
@@ -21,6 +24,13 @@
           <h1 class="title">Vault‑Tec Memory</h1>
           <div class="subtitle">Pip‑Boy Training — Find all Tech Pairs</div>
         </div>
+      </div>
+
+      <div class="theme-toggle">
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
+          <span class="theme-icon light">☀️</span>
+          <span class="theme-icon dark">🌙</span>
+        </button>
       </div>
 
       <div class="score-box">
@@ -64,6 +74,7 @@
           <div class="label">Leaderboard</div>
           <div class="lb-list" id="leaderboardList"></div>
           <div class="lb-controls">
+            <button class="btn ghost" id="openHighScores">High Scores</button>
             <button class="btn ghost" id="exportLb">Export</button>
             <button class="btn ghost" id="shareLb">Share</button>
             <button class="btn ghost" id="clearLb">Clear</button>
@@ -133,6 +144,20 @@
       <div style="display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end">
         <button class="btn ghost" id="closeModal">Close</button>
         <button class="btn" id="playAgain">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- High Scores Modal -->
+  <div class="modal-overlay" id="highScoresOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-box" role="document">
+      <h2>High Scores</h2>
+      <div class="subtitle">Best records per difficulty</div>
+      <div class="modal-stats" style="display:block">
+        <div id="highScoresContainer"></div>
+      </div>
+      <div style="display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end">
+        <button class="btn ghost" id="closeHighScores">Close</button>
       </div>
     </div>
   </div>

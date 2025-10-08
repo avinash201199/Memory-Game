@@ -301,7 +301,6 @@
     }
   });
 
-
   function createMatchParticles(card) {
     const rect = card.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;

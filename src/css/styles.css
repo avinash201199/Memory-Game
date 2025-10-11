@@ -554,7 +554,7 @@ h1.title {
     margin-bottom: 50px;
   }
   .footer {
-    margin-top: 2rem auto 0;
+    margin: 2rem auto 0;
     padding: 1rem 0;
   }
   .star { width: 34px; height: 28px; }
@@ -578,7 +578,7 @@ h1.title {
   }
   .footer {
     padding: 1rem;
-    margin-top: 1.5rem auto 0;
+    margin: 1.5rem auto 0;
   }
   .footer-brand {
     font-size: 0.8rem;

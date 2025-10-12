@@ -86,6 +86,67 @@ Then open [http://localhost:8080](http://localhost:8080) in your browser or go t
 
 ---
 
+## 🛠️ How to Contribute
+
+We welcome contributions from the community to make Vault-Tec Memory Game even better! To ensure a smooth collaboration, please follow these steps:
+
+### 1. Fork the Repository
+
+Click the **Fork** button at the top right of this page to create a copy of the repository under your GitHub account.
+
+### 2. Clone Your Fork
+
+Clone your forked repository to your local machine:
+```sh
+https://github.com/avinash201199/Memory-Game.git
+cd Memory-Game
+```
+
+### 3. Create a New Branch
+
+Create a new branch for your feature or bugfix:
+```sh
+git checkout -b feature/your-feature-name
+```
+
+### 4. Make Your Changes
+
+Edit the code or documentation as needed. Please ensure your changes are well-documented and tested.
+
+### 5. Commit and Push
+
+Commit your changes with a clear message:
+```sh
+git add .
+git commit -m "Describe your changes"
+git push origin feature/your-feature-name
+```
+
+### 6. Open a Pull Request
+
+Go to your fork on GitHub and open a **Pull Request** against the main repository's `main` branch.  
+Include a clear description of your changes and reference any related issues if applicable.
+
+### 7. Code Review & Discussion
+
+Please be responsive to code review comments or questions. We may request changes before merging.
+
+---
+
+**Contribution Guidelines:**
+- Follow the existing code style and structure.
+- Write clear, descriptive commit messages.
+- Test your changes before submitting a pull request.
+- If you are adding a new feature, consider including relevant documentation and/or screenshots.
+- Be respectful and collaborative in all discussions.
+
+---
+
+Thank you for your interest in contributing!  
+If you have any questions, feel free to open an issue or reach out via the [WhatsApp channel](https://chat.whatsapp.com/BfBWJhy4xj3CJFSGE2qBrL).
+
+---
+
 ## ✨ Difficulty Selection
 
 - The **selected difficulty** is highlighted in **yellow**.

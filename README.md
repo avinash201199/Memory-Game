@@ -4,6 +4,9 @@
 
 ---
 
+[Join WhatsApp channel for any doubts](https://chat.whatsapp.com/BfBWJhy4xj3CJFSGE2qBrL)
+
+
 ## 📌 Overview
 
 **Vault-Tec Memory** is a retro-inspired card matching game styled after the Pip-Boy from Fallout.  
@@ -55,6 +58,10 @@ Memory-Game
 
 - **Just open `index.html` in your web browser** to play the game.
 - No build step or server is required for basic use.
+
+### Built-in Demo
+
+This fork includes a small in-page "Play Demo" button (top-left) that runs a scripted playback showing the game UI, hints, difficulty changes and an automatic win demonstration. Use this to preview the UI without recording or external videos.
 
 ### Recommended: Run with a Local Server
 

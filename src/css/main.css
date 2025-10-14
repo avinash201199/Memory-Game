@@ -1,4 +1,23 @@
+/*
+========================================
+--- Table of Contents ---
+========================================
+1.  Root & Theme Variables
+2.  General Styles (body, typography)
+3.  Layout (app, panel, game)
+4.  Components
+    - Brand & Title
+    - Score Box
+    - Buttons
+    - Cards
+    - Modal
+    - Footer
+5.  Animations
+6.  Media Queries
+========================================
+*/
 
+/* 1. Root & Theme Variables */
 /*responsive issues are completely fixed by Gihan Harindra(GihanIT)*/
 :root {
   /* Dark theme (default) */
@@ -15,7 +34,6 @@
   --bg-gradient-end: #021232;
 }
 
-/* Light theme variables */
 [data-theme="light"] {
   --vault-blue: #1a4d98;
   --vault-blue-rgb: 26, 77, 152;
@@ -30,6 +48,7 @@
   --bg-gradient-end: #e9ecef;
 }
 
+/* 2. General Styles */
 * {
   box-sizing: border-box;
 }
@@ -37,6 +56,7 @@
 html, body {
   height: 100%;
 }
+
 body {
   margin: 0;
   min-height: 100%;
@@ -50,6 +70,7 @@ body {
   padding: 2.4rem;
 }
 
+/* 3. Layout */
 .page-container {
   width: 100%;
 }
@@ -75,17 +96,41 @@ body {
   z-index: 50; /* ensure left panel floats above the game area */
 }
 
-.panel.leaderboard {
-  max-width: 320px;
-  margin-left: 0.6rem;
+.game {
+  padding: 1.2rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1; /* keep the game under the left panel */
 }
 
-.lb-list { margin-top: 0.8rem; display:flex; flex-direction:column; gap:0.45rem }
-.lb-row { display:flex; justify-content:space-between; gap:0.6rem; padding:0.45rem; border-radius:8px; background:rgba(255,255,255,0.02); font-size:0.92rem }
-.lb-controls { display:flex; gap:0.5rem; margin-top:0.8rem }
-.lb-list { min-height: 48px; }
-.muted-note { color:var(--muted); font-size:0.85rem }
+.top-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.deck {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-width: 720px;
+  padding: 1rem;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+/* 4. Components */
+
+/* Brand & Title */
 .brand {
   display: flex;
   gap: 0.8rem;
@@ -125,6 +170,7 @@ h1.title {
   margin-top: 0.35rem;
 }
 
+/* Score Box */
 .score-box {
   margin-top: 1.4rem;
   background: var(--panel);
@@ -142,7 +188,7 @@ h1.title {
   margin-bottom: 0.8rem;
 }
 
-.score-row .label {
+.score-label {
   font-size: 0.86rem;
   color: var(--muted);
 }
@@ -210,10 +256,87 @@ h1.title {
   transition: width 0.6s linear;
 }
 
+/* Buttons */
 .controls {
   display: flex;
   gap: 0.6rem;
   margin-top: 1rem;
+}
+
+.btn {
+    background: linear-gradient(180deg, var(--vault-blue), rgba(var(--vault-blue-rgb), 0.9));
+    color: var(--vault-yellow);
+    border: 2px solid var(--vault-yellow);
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn.ghost {
+    background: transparent;
+    border: 2px solid var(--vault-yellow);
+    color: var(--vault-yellow);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--accent-glow),
+                0 6px 20px rgba(var(--vault-blue-rgb), 0.4);
+}
+
+.btn:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    animation: shine 1.5s infinite;
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: var(--accent-glow-intense);
+}
+
+.difficulty-btn {
+    min-width: 100px;
+    text-align: center;
+    padding: 0.5rem 1rem;
+}
+
+.difficulty-btn.btn--active {
+    background: var(--vault-yellow);
+    color: var(--vault-blue);
+    border-color: var(--vault-yellow);
+    box-shadow: var(--accent-glow-intense);
+}
+
+.difficulty-btn:hover {
+    background: linear-gradient(180deg, 
+        rgba(var(--vault-blue-rgb), 0.95), 
+        rgba(var(--vault-blue-rgb), 0.85)
+    );
+}
+
+.difficulty-btn.btn--active:hover {
+    background: var(--vault-yellow);
+    transform: translateY(0);
 }
 
 .btn.ghost#playDemo {
@@ -221,88 +344,73 @@ h1.title {
   border: 1px dashed rgba(255,255,255,0.04);
 }
 
-/* confetti canvas covers the main area when active */
-#confettiCanvas {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 40;
-  display: none;
+/* Theme Toggle */
+.theme-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 0.8rem 0;
+  padding: 0 0.5rem;
 }
 
-/* accessible focus style for mute button */
-#mute:focus, #mute[aria-pressed="true"] {
-  outline: 3px solid rgba(255, 210, 63, 0.35);
-  outline-offset: 2px;
-}
-
-.btn {
-  border: none;
-  padding: 0.6rem 0.9rem;
-  border-radius: 10px;
+.theme-toggle-btn {
+  background: var(--panel);
+  border: 2px solid var(--vault-yellow);
+  border-radius: 2rem;
+  padding: 0.4rem 0.8rem;
   cursor: pointer;
-  font-weight: 600;
-  background: linear-gradient(180deg, var(--vault-yellow), #f0c33a);
-  color: #021021;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-}
-
-.btn.ghost {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  color: var(--muted);
-}
-
-.btn--active {
-  background: var(--vault-yellow);
-  color: #00142b;
-  border-color: transparent;
-}
-
-.hint {
-  margin-top: 1rem;
-  font-size: 0.84rem;
-  color: #9fb6d9;
-}
-
-.game {
-  padding: 1.2rem;
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  min-height: 420px;
+  transition: all 0.3s ease;
   display: flex;
-  flex-direction: column;
+  gap: 0.5rem;
   align-items: center;
-  gap: 1rem;
-  z-index: 1; /* keep the game under the left panel */
+  width: auto;
+  min-width: 4rem;
+  height: 2.5rem;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.top-row {
-  width: 100%;
+.theme-toggle-btn:hover {
+  box-shadow: var(--accent-glow);
+  transform: translateY(-2px);
+  border-color: var(--vault-yellow);
+  background: linear-gradient(to right bottom, var(--panel), rgba(var(--vault-blue-rgb), 0.8));
+}
+
+.theme-toggle-btn:hover .theme-icon {
+  animation: wiggle 0.5s ease;
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95) translateY(0);
+  box-shadow: var(--accent-glow-intense);
+}
+
+.theme-icon {
+  font-size: 1.1rem;
+  line-height: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.progress {
-  font-family: 'Share Tech Mono', monospace;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.deck {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  width: 100%;
-  max-width: 720px;
-  padding: 1rem;
-  align-content: center;
-  justify-items: center;
   justify-content: center;
 }
 
+[data-theme="light"] .theme-icon.light {
+  display: none;
+}
+
+[data-theme="light"] .theme-icon.dark {
+  display: flex;
+}
+
+.theme-icon.dark {
+  display: none;
+}
+
+.theme-icon.light {
+  display: flex;
+}
+
+/* Cards */
 .card {
   width: 140px;
   height: 140px;
@@ -311,6 +419,11 @@ h1.title {
   user-select: none;
   position: relative;
   z-index: 1;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
 }
 
 .card-inner {
@@ -368,42 +481,7 @@ h1.title {
   animation: matchPulse .9s ease-in-out 1;
 }
 
-@keyframes matchPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.06);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Particle animation for matched cards */
-.match-particle {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: radial-gradient(circle, var(--vault-yellow), #f7c84b);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 1000;
-  animation: particleBurst 0.8s ease-out forwards;
-  box-shadow: 0 0 8px rgba(255, 210, 63, 0.8);
-}
-
-@keyframes particleBurst {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--tx), var(--ty)) scale(0);
-    opacity: 0;
-  }
-}
-
+/* Modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -430,7 +508,6 @@ h1.title {
   margin: 0 0 0.6rem;
 }
 
-/* High Scores table styles (inherits Pip-Boy theme) */
 #highScoresContainer table th,
 #highScoresContainer table td {
   padding: 8px 10px;
@@ -460,24 +537,7 @@ h1.title {
   min-width: 120px;
 }
 
-.confetti {
-  height: 80px;
-  margin-top: 0.6rem;
-}
-
-.difficulty-btn {
-  background: #22304a;
-  color: var(--muted);
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: background 0.2s, color 0.2s;
-  cursor: pointer;
-}
-.difficulty-btn.btn--active {
-  background: var(--vault-yellow);
-  color: #00142b;
-  border-color: transparent;
-}
-
+/* Footer */
 .footer {
   width: 100%;
   max-width: 1100px;
@@ -522,7 +582,49 @@ h1.title {
   font-size: 0.75rem;
 }
 
+/* 5. Animations */
+@keyframes matchPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    20% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-12deg); }
+  75% { transform: rotate(12deg); }
+}
+
+/* 6. Media Queries */
 @media (max-width: 900px) {
   body {
     padding: 1rem; 
@@ -559,6 +661,7 @@ h1.title {
   }
   .star { width: 34px; height: 28px; }
 }
+
 @media (max-width: 480px) {
   .deck {
     grid-template-columns: repeat(3, 1fr);
@@ -585,4 +688,89 @@ h1.title {
     flex-direction: column;
     gap: 0.3rem;
   }
+}
+
+@media (max-width: 768px) {
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .difficulty-btn {
+        min-width: 90px;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .theme-toggle {
+      margin: 0.6rem 0;
+    }
+    
+    .theme-toggle-btn {
+      padding: 0.35rem 0.7rem;
+      height: 2.2rem;
+      min-width: 3.5rem;
+    }
+    
+    .theme-icon {
+      font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        padding: 0.4rem 0.9rem;
+        font-size: 0.85rem;
+    }
+    
+    .difficulty-btn {
+        min-width: 80px;
+        padding: 0.35rem 0.7rem;
+    }
+
+    .theme-toggle {
+      margin: 0.5rem 0;
+    }
+    
+    .theme-toggle-btn {
+      padding: 0.3rem 0.6rem;
+      height: 2rem;
+      min-width: 3rem;
+      border-width: 1.5px;
+    }
+    
+    .theme-icon {
+      font-size: 0.9rem;
+    }
+}
+
+/* Prevent text selection */
+.btn, .theme-toggle-btn {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .btn:hover::before {
+        animation: none;
+    }
+    
+    .btn:active {
+        transform: scale(0.98);
+        background: linear-gradient(180deg, 
+            rgba(var(--vault-blue-rgb), 0.9), 
+            rgba(var(--vault-blue-rgb), 0.8)
+        );
+    }
+
+    .theme-toggle-btn:hover {
+      box-shadow: none;
+    }
 }

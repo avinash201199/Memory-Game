@@ -311,6 +311,148 @@ h1.title {
   user-select: none;
   position: relative;
   z-index: 1;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(255, 210, 63, 0.3), 
+              0 0 40px rgba(255, 210, 63, 0.15),
+              inset 0 0 20px rgba(255, 210, 63, 0.1);
+  border: 1px solid rgba(255, 210, 63, 0.3);
+}
+
+.card:hover::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: radial-gradient(circle, rgba(255, 210, 63, 0.1) 0%, transparent 70%);
+  border-radius: 20px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Light theme hover effects */
+[data-theme="light"] .card:hover {
+  box-shadow: 0 8px 25px rgba(26, 77, 152, 0.4);
+}
+
+.card:hover .card-back {
+  box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.6), 
+              0 0 20px rgba(255, 210, 63, 0.4),
+              0 0 60px rgba(255, 210, 63, 0.2),
+              inset 0 0 30px rgba(255, 210, 63, 0.15);
+}
+
+/* Light theme card-back hover */
+[data-theme="light"] .card:hover .card-back {
+  box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(26, 77, 152, 0.5);
+}
+
+.card:hover .card-back .logo {
+  text-shadow: 0 0 10px rgba(255, 210, 63, 0.8),
+               0 0 20px rgba(255, 210, 63, 0.6),
+               0 0 30px rgba(255, 210, 63, 0.4);
+  transform: scale(1.05);
+  transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Light theme logo hover */
+[data-theme="light"] .card:hover .card-back .logo {
+  text-shadow: 0 0 10px rgba(26, 77, 152, 0.8);
+}
+
+.card:hover .card-front {
+  box-shadow: 0 0 20px rgba(255, 210, 63, 0.3),
+              0 0 40px rgba(255, 210, 63, 0.2),
+              inset 0 0 20px rgba(255, 210, 63, 0.1);
+}
+
+/* Light theme card-front hover */
+[data-theme="light"] .card:hover .card-front {
+  box-shadow: 0 0 20px rgba(26, 77, 152, 0.4);
+}
+
+.card:hover .card-front img {
+  filter: brightness(1.15) contrast(1.1) drop-shadow(0 0 8px rgba(255, 210, 63, 0.5))
+          drop-shadow(0 0 16px rgba(255, 210, 63, 0.3));
+  transform: scale(1.02);
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+/* Light theme card-front img hover */
+[data-theme="light"] .card:hover .card-front img {
+  filter: brightness(1.1) drop-shadow(0 0 8px rgba(26, 77, 152, 0.6));
+}
+
+/* Disable hover effects for matched cards */
+.card.matched:hover {
+  transform: none;
+  box-shadow: none;
+  cursor: default;
+}
+
+.card.matched:hover .card-back,
+.card.matched:hover .card-front {
+  box-shadow: none;
+}
+
+.card.matched:hover .card-back .logo {
+  text-shadow: none;
+}
+
+.card.matched:hover .card-front img {
+  filter: none;
+}
+
+/* Special hover effect for flipped cards */
+.card.is-flip:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(255, 210, 63, 0.4),
+              0 0 50px rgba(255, 210, 63, 0.25),
+              inset 0 0 25px rgba(255, 210, 63, 0.15);
+}
+
+/* Light theme flipped card hover */
+[data-theme="light"] .card.is-flip:hover {
+  box-shadow: 0 12px 30px rgba(26, 77, 152, 0.5);
+}
+
+/* Dark theme pulsing glow animation */
+.card:hover .card-back .logo {
+  animation: darkGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes darkGlow {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 210, 63, 0.8),
+                 0 0 20px rgba(255, 210, 63, 0.6),
+                 0 0 30px rgba(255, 210, 63, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(255, 210, 63, 1),
+                 0 0 25px rgba(255, 210, 63, 0.8),
+                 0 0 35px rgba(255, 210, 63, 0.6);
+  }
+}
+
+/* Mobile touch effects */
+@media (hover: none) {
+  .card:active {
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  [data-theme="light"] .card:active {
+    box-shadow: 0 4px 15px rgba(26, 77, 152, 0.3);
+  }
+  
+  .card:active {
+    box-shadow: 0 4px 15px rgba(255, 210, 63, 0.2);
+  }
 }
 
 .card-inner {

@@ -62,6 +62,16 @@
           </div>
         </div>
 
+        <div style="margin-top:0.8rem;display:flex;align-items:center;gap:0.4rem">
+          <label for="move-limit-toggle">
+            <input type="checkbox" id="move-limit-toggle" />
+            Enable Move Limit
+          </label>
+        </div>
+        <div id="move-limit-display" style="display:none ;margin-top:0.4rem;color:var(--muted);font-size:0.9rem">
+          Moves: <span id="remaining-moves"></span> remaining
+        </div>
+
         <div class="controls">
           <button class="btn" id="restart">Restart</button>
           <button class="btn ghost" id="hint">Reveal 1 Pair</button>

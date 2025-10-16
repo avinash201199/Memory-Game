@@ -41,6 +41,9 @@
   const highScoresOverlay = document.getElementById('highScoresOverlay');
   const highScoresContainer = document.getElementById('highScoresContainer');
   const closeHighScoresBtn = document.getElementById('closeHighScores');
+  const moveLimitToggle = document.getElementById('move-limit-toggle');
+  const moveLimitDisplay = document.getElementById('move-limit-display');
+  const remainingMovesEl = document.getElementById('remaining-moves');
 
   // state
   let deck = [];
@@ -67,6 +70,24 @@
   const playDemoBtn = document.getElementById('playDemo');
   let audioCtx = null;
   let isMuted = false;
+  let moveLimitEnabled = false;
+  let moveLimitMax = 0;
+  let remainingMoves = 0;
+
+  // toggle listener
+  moveLimitToggle.addEventListener('change', () => {
+    moveLimitEnabled = moveLimitToggle.checked;
+    moveLimitDisplay.style.display = moveLimitEnabled ? 'block' : 'none';
+    setMoveLimitForDifficulty(selectedDifficulty);
+  });
+
+  function setMoveLimitForDifficulty(diff) {
+    if (!moveLimitEnabled) return;
+    const limits = { easy: 30, medium: 25, hard: 20 };
+    moveLimitMax = limits[diff];
+    remainingMoves = moveLimitMax - moves;
+    remainingMovesEl.textContent = remainingMoves;
+  }
 
   // util
   function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]] } return a }
@@ -285,6 +306,9 @@
     // ensure cards are interactive
     Array.from(deckEl.querySelectorAll('.card')).forEach(c => { c.removeAttribute('aria-disabled'); c.classList.remove('matched', 'is-flip'); });
     locked = false;
+    if (moveLimitEnabled) {
+      setMoveLimitForDifficulty(selectedDifficulty);
+    }
   }
 
   // card interactions
@@ -347,6 +371,17 @@
     // From now, lock board until resolved
     locked = true;
     moves++;
+    if (moveLimitEnabled) {
+      remainingMoves = moveLimitMax - moves;
+      remainingMovesEl.textContent = remainingMoves;
+
+      if (remainingMoves <= 0 && matched < totalTiles) {
+        Array.from(deckEl.querySelectorAll('.card')).forEach(c => c.setAttribute('aria-disabled', 'true'));
+        stopTimer();
+        showLoseModal('moves');
+        return;
+      }
+    }
     updateUI();
 
     const [a, b] = opened;
@@ -426,9 +461,14 @@
     } catch (e) { }
   }
 
-  function showLoseModal() {
-    modalTitle.textContent = "TIME'S UP — Vault‑Tec Regrets the Loss";
-    modalMessage.textContent = 'You ran out of time. Review your training and try again.';
+  function showLoseModal(reason) {
+    if (reason === 'moves') {
+      modalTitle.textContent = "OUT OF MOVES — Vault-Tec Regrets the Loss";
+      modalMessage.textContent = 'You ran out of moves. Sharpen your memory and try again.';
+    } else {
+      modalTitle.textContent = "TIME'S UP — Vault-Tec Regrets the Loss";
+      modalMessage.textContent = 'You ran out of time. Review your training and try again.';
+    }
     modalStats.innerHTML = '';
     modalStats.appendChild(statCard('Matched', `${matched} / ${totalTiles}`));
     modalStats.appendChild(statCard('Moves', moves));

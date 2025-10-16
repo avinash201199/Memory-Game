@@ -564,6 +564,7 @@ h1.title {
   align-items: center;
   justify-content: center;
   z-index: 30;
+  left: 320px; 
 }
 
 .modal-box {

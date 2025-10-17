@@ -4,7 +4,6 @@
     color: var(--vault-yellow);
     border: 2px solid var(--vault-yellow);
     border-radius: 8px;
-    padding: 0.6rem 1.2rem;
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.95rem;
     cursor: pointer;
@@ -22,6 +21,7 @@
     background: transparent;
     border: 2px solid var(--vault-yellow);
     color: var(--vault-yellow);
+    margin: 0.2rem 0.2rem;
 }
 
 /* Hover effects */

@@ -83,11 +83,11 @@
         <div style="margin-top:0.8rem">
           <div class="label">Leaderboard</div>
           <div class="lb-list" id="leaderboardList"></div>
-          <div class="lb-controls">
-            <button class="btn ghost" id="openHighScores">High Scores</button>
-            <button class="btn ghost" id="exportLb">Export</button>
-            <button class="btn ghost" id="shareLb">Share</button>
-            <button class="btn ghost" id="clearLb">Clear</button>
+          <div class="lb-controls" role="group" aria-label="Leaderboard actions">
+            <button class="btn ghost btn--sm" id="openHighScores" title="View full high scores" aria-label="Open high scores">High Scores</button>
+            <button class="btn ghost btn--sm" id="exportLb" title="Export leaderboard as JSON" aria-label="Export leaderboard">Export</button>
+            <button class="btn ghost btn--sm" id="shareLb" title="Share leaderboard via link" aria-label="Share leaderboard">Share</button>
+            <button class="btn ghost btn--sm" id="clearLb" title="Clear leaderboard" aria-label="Clear leaderboard">Clear</button>
           </div>
         </div>
       </div>

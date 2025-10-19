@@ -1,4 +1,3 @@
-
 /*responsive issues are completely fixed by Gihan Harindra(GihanIT)*/
 :root {
   /* Dark theme (default) */
@@ -34,16 +33,26 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 body {
   margin: 0;
   min-height: 100%;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: radial-gradient(1200px 700px at 10% 10%, rgba(2, 46, 84, 0.5), transparent),
-              radial-gradient(900px 500px at 90% 90%, rgba(3, 20, 60, 0.45), transparent),
-              linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 60%);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  background: radial-gradient(
+      1200px 700px at 10% 10%,
+      rgba(2, 46, 84, 0.5),
+      transparent
+    ),
+    radial-gradient(900px 500px at 90% 90%, rgba(3, 20, 60, 0.45), transparent),
+    linear-gradient(
+      180deg,
+      var(--bg-gradient-start) 0%,
+      var(--bg-gradient-end) 60%
+    );
   color: var(--muted);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -62,7 +71,7 @@ body {
   grid-template-columns: 320px 1fr;
   gap: 8rem; /* clear separation */
   align-items: start;
-   justify-content: center; /*neat alignment */
+  justify-content: center; /*neat alignment */
 }
 
 .panel {
@@ -81,12 +90,37 @@ body {
   margin-left: 0.6rem;
 }
 
-.lb-list { margin-top: 0.8rem; display:flex; flex-direction:column; gap:0.45rem }
-.lb-row { display:flex; justify-content:space-between; gap:0.6rem; padding:0.45rem; border-radius:8px; background:rgba(255,255,255,0.02); font-size:0.92rem }
-.lb-controls { display:flex; gap:0.5rem; margin-top:0.8rem }
-.lb-controls { flex-wrap: wrap; align-items: center }
-.lb-list { min-height: 48px; }
-.muted-note { color:var(--muted); font-size:0.85rem }
+.lb-list {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.lb-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.45rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 0.92rem;
+}
+.lb-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+.lb-controls {
+  flex-wrap: wrap;
+  align-items: center;
+}
+.lb-list {
+  min-height: 48px;
+}
+.muted-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
 
 .brand {
   display: flex;
@@ -105,9 +139,10 @@ body {
   justify-content: center;
   color: var(--vault-yellow);
   font-weight: 700;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   border: 2px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 6px 24px rgba(17, 68, 128, 0.25), inset 0 -8px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 24px rgba(17, 68, 128, 0.25),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.4);
   font-size: 1.6rem;
   overflow: hidden;
   padding: 0;
@@ -125,7 +160,7 @@ h1.title {
   font-size: 1.35rem;
   margin: 0;
   color: var(--vault-yellow);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   letter-spacing: 0.08rem;
   text-transform: uppercase;
   font-weight: 700;
@@ -183,7 +218,7 @@ h1.title {
   justify-content: center;
   font-weight: 700;
   color: #00142b;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 .star--lost {
@@ -202,7 +237,7 @@ h1.title {
   padding: 0.45rem 0.8rem;
   border-radius: 8px;
   color: var(--muted);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
 }
 
 .timer-bar {
@@ -229,8 +264,12 @@ h1.title {
 }
 
 .btn.ghost#playDemo {
-  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border: 1px dashed rgba(255,255,255,0.04);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px dashed rgba(255, 255, 255, 0.04);
 }
 
 /* confetti canvas covers the main area when active */
@@ -243,7 +282,8 @@ h1.title {
 }
 
 /* accessible focus style for mute button */
-#mute:focus, #mute[aria-pressed="true"] {
+#mute:focus,
+#mute[aria-pressed="true"] {
   outline: 3px solid rgba(255, 210, 63, 0.35);
   outline-offset: 2px;
 }
@@ -263,6 +303,7 @@ h1.title {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.04);
   color: var(--muted);
+  text-align: center;
 }
 
 /* Small button variant for compact controls like leaderboard actions */
@@ -275,9 +316,19 @@ h1.title {
 
 /* Ensure leaderboard controls wrap nicely on small viewports */
 @media (max-width: 480px) {
-  .lb-controls { gap: 0.4rem; margin-top: 0.6rem }
-  .lb-controls .btn { flex: 1 1 auto; min-width: 48%; text-align: center }
-  .btn--sm { min-width: 48%; padding: 0.45rem 0.6rem }
+  .lb-controls {
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+  }
+  .lb-controls .btn {
+    flex: 1 1 auto;
+    min-width: 48%;
+    text-align: center;
+  }
+  .btn--sm {
+    min-width: 48%;
+    padding: 0.45rem 0.6rem;
+  }
 }
 
 .btn--active {
@@ -313,7 +364,7 @@ h1.title {
 }
 
 .progress {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   color: var(--muted);
   font-size: 0.9rem;
 }
@@ -344,20 +395,23 @@ h1.title {
 
 .card:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(255, 210, 63, 0.3), 
-              0 0 40px rgba(255, 210, 63, 0.15),
-              inset 0 0 20px rgba(255, 210, 63, 0.1);
+  box-shadow: 0 8px 25px rgba(255, 210, 63, 0.3),
+    0 0 40px rgba(255, 210, 63, 0.15), inset 0 0 20px rgba(255, 210, 63, 0.1);
   border: 1px solid rgba(255, 210, 63, 0.3);
 }
 
 .card:hover::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -10px;
   left: -10px;
   right: -10px;
   bottom: -10px;
-  background: radial-gradient(circle, rgba(255, 210, 63, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 210, 63, 0.1) 0%,
+    transparent 70%
+  );
   border-radius: 20px;
   z-index: -1;
   pointer-events: none;
@@ -369,21 +423,20 @@ h1.title {
 }
 
 .card:hover .card-back {
-  box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.6), 
-              0 0 20px rgba(255, 210, 63, 0.4),
-              0 0 60px rgba(255, 210, 63, 0.2),
-              inset 0 0 30px rgba(255, 210, 63, 0.15);
+  box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(255, 210, 63, 0.4), 0 0 60px rgba(255, 210, 63, 0.2),
+    inset 0 0 30px rgba(255, 210, 63, 0.15);
 }
 
 /* Light theme card-back hover */
 [data-theme="light"] .card:hover .card-back {
-  box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(26, 77, 152, 0.5);
+  box-shadow: inset 0 -8px 30px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(26, 77, 152, 0.5);
 }
 
 .card:hover .card-back .logo {
   text-shadow: 0 0 10px rgba(255, 210, 63, 0.8),
-               0 0 20px rgba(255, 210, 63, 0.6),
-               0 0 30px rgba(255, 210, 63, 0.4);
+    0 0 20px rgba(255, 210, 63, 0.6), 0 0 30px rgba(255, 210, 63, 0.4);
   transform: scale(1.05);
   transition: transform 0.2s ease, text-shadow 0.2s ease;
 }
@@ -394,9 +447,8 @@ h1.title {
 }
 
 .card:hover .card-front {
-  box-shadow: 0 0 20px rgba(255, 210, 63, 0.3),
-              0 0 40px rgba(255, 210, 63, 0.2),
-              inset 0 0 20px rgba(255, 210, 63, 0.1);
+  box-shadow: 0 0 20px rgba(255, 210, 63, 0.3), 0 0 40px rgba(255, 210, 63, 0.2),
+    inset 0 0 20px rgba(255, 210, 63, 0.1);
 }
 
 /* Light theme card-front hover */
@@ -405,8 +457,9 @@ h1.title {
 }
 
 .card:hover .card-front img {
-  filter: brightness(1.15) contrast(1.1) drop-shadow(0 0 8px rgba(255, 210, 63, 0.5))
-          drop-shadow(0 0 16px rgba(255, 210, 63, 0.3));
+  filter: brightness(1.15) contrast(1.1)
+    drop-shadow(0 0 8px rgba(255, 210, 63, 0.5))
+    drop-shadow(0 0 16px rgba(255, 210, 63, 0.3));
   transform: scale(1.02);
   transition: filter 0.2s ease, transform 0.2s ease;
 }
@@ -440,8 +493,7 @@ h1.title {
 .card.is-flip:hover {
   transform: translateY(-6px) scale(1.03);
   box-shadow: 0 12px 30px rgba(255, 210, 63, 0.4),
-              0 0 50px rgba(255, 210, 63, 0.25),
-              inset 0 0 25px rgba(255, 210, 63, 0.15);
+    0 0 50px rgba(255, 210, 63, 0.25), inset 0 0 25px rgba(255, 210, 63, 0.15);
 }
 
 /* Light theme flipped card hover */
@@ -457,13 +509,11 @@ h1.title {
 @keyframes darkGlow {
   0% {
     text-shadow: 0 0 10px rgba(255, 210, 63, 0.8),
-                 0 0 20px rgba(255, 210, 63, 0.6),
-                 0 0 30px rgba(255, 210, 63, 0.4);
+      0 0 20px rgba(255, 210, 63, 0.6), 0 0 30px rgba(255, 210, 63, 0.4);
   }
   100% {
     text-shadow: 0 0 15px rgba(255, 210, 63, 1),
-                 0 0 25px rgba(255, 210, 63, 0.8),
-                 0 0 35px rgba(255, 210, 63, 0.6);
+      0 0 25px rgba(255, 210, 63, 0.8), 0 0 35px rgba(255, 210, 63, 0.6);
   }
 }
 
@@ -472,11 +522,11 @@ h1.title {
   .card:active {
     transform: translateY(-2px) scale(1.01);
   }
-  
+
   [data-theme="light"] .card:active {
     box-shadow: 0 4px 15px rgba(26, 77, 152, 0.3);
   }
-  
+
   .card:active {
     box-shadow: 0 4px 15px rgba(255, 210, 63, 0.2);
   }
@@ -487,7 +537,7 @@ h1.title {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform .45s cubic-bezier(.2, .9, .2, 1);
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
 }
 
 .card.is-flip .card-inner {
@@ -511,7 +561,7 @@ h1.title {
 }
 
 .card-back .logo {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   color: var(--vault-yellow);
   font-weight: 700;
   font-size: 1.4rem;
@@ -534,7 +584,7 @@ h1.title {
 }
 
 .card.matched .card-inner {
-  animation: matchPulse .9s ease-in-out 1;
+  animation: matchPulse 0.9s ease-in-out 1;
 }
 
 @keyframes matchPulse {
@@ -581,7 +631,7 @@ h1.title {
   align-items: center;
   justify-content: center;
   z-index: 30;
-  left: 320px; 
+  left: 320px;
 }
 
 .modal-box {
@@ -596,7 +646,7 @@ h1.title {
 
 .modal-box h2 {
   color: var(--vault-yellow);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   margin: 0 0 0.6rem;
 }
 
@@ -607,12 +657,12 @@ h1.title {
 }
 #highScoresContainer table thead th {
   color: var(--vault-yellow);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-weight: 700;
 }
 #highScoresContainer table tbody tr td {
-  background: rgba(255,255,255,0.02);
-  border-bottom: 1px solid rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .modal-stats {
@@ -638,7 +688,7 @@ h1.title {
 .difficulty-btn {
   background: #22304a;
   color: var(--muted);
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: background 0.2s, color 0.2s;
   cursor: pointer;
 }
@@ -670,7 +720,7 @@ h1.title {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-weight: 500;
   color: var(--vault-yellow);
   letter-spacing: 0.05rem;
@@ -684,7 +734,8 @@ h1.title {
   font-size: 1rem;
   background: linear-gradient(180deg, var(--vault-blue), #123a78);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 3px 12px rgba(17, 68, 128, 0.15), inset 0 -4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 12px rgba(17, 68, 128, 0.15),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .footer-info {
@@ -692,27 +743,26 @@ h1.title {
   font-size: 0.75rem;
 }
 
-
 @media (max-width: 900px) {
   body {
-    padding: 1rem; 
+    padding: 1rem;
   }
   .app {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
     max-width: 920px;
-    margin: 20px auto; 
+    margin: 20px auto;
   }
   .panel {
-    order: 2; 
+    order: 2;
     min-height: auto;
   }
   .game {
     order: 1;
   }
   .deck {
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
-    padding: 0.5rem; 
+    padding: 0.5rem;
     max-width: 100%;
   }
   .card {
@@ -727,7 +777,10 @@ h1.title {
     margin: 2rem auto 0;
     padding: 1rem 0;
   }
-  .star { width: 34px; height: 28px; }
+  .star {
+    width: 34px;
+    height: 28px;
+  }
 }
 @media (max-width: 480px) {
   .deck {
@@ -738,7 +791,7 @@ h1.title {
     width: 100%;
   }
   .panel {
-    padding: 1rem; 
+    padding: 1rem;
   }
   .controls {
     flex-direction: column;

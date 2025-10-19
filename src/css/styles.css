@@ -60,8 +60,9 @@ body {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 320px 1fr;
-  gap: 2rem;
+  gap: 8rem; /* clear separation */
   align-items: start;
+   justify-content: center; /*neat alignment */
 }
 
 .panel {
@@ -737,5 +738,18 @@ h1.title {
     font-size: 0.8rem;
     flex-direction: column;
     gap: 0.3rem;
+  }
+}
+/* Responsive layout adjustments */
+@media (max-width: 1400px) {
+  .app {
+    gap: 5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app {
+    gap: 3rem;
+    grid-template-columns: 1fr; /* stack panel on top */
   }
 }

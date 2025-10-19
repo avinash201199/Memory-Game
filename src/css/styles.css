@@ -83,6 +83,7 @@ body {
 .lb-list { margin-top: 0.8rem; display:flex; flex-direction:column; gap:0.45rem }
 .lb-row { display:flex; justify-content:space-between; gap:0.6rem; padding:0.45rem; border-radius:8px; background:rgba(255,255,255,0.02); font-size:0.92rem }
 .lb-controls { display:flex; gap:0.5rem; margin-top:0.8rem }
+.lb-controls { flex-wrap: wrap; align-items: center }
 .lb-list { min-height: 48px; }
 .muted-note { color:var(--muted); font-size:0.85rem }
 
@@ -261,6 +262,21 @@ h1.title {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.04);
   color: var(--muted);
+}
+
+/* Small button variant for compact controls like leaderboard actions */
+.btn--sm {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  min-width: 64px;
+}
+
+/* Ensure leaderboard controls wrap nicely on small viewports */
+@media (max-width: 480px) {
+  .lb-controls { gap: 0.4rem; margin-top: 0.6rem }
+  .lb-controls .btn { flex: 1 1 auto; min-width: 48%; text-align: center }
+  .btn--sm { min-width: 48%; padding: 0.45rem 0.6rem }
 }
 
 .btn--active {

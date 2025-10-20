@@ -68,14 +68,14 @@ body {
 }
 
 .app {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 8rem; /* clear separation */
-  align-items: start;
-   justify-content: center; /*neat alignment */
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 8rem; /* clear separation */
+    align-items: start;
+    justify-content: center; /*neat alignment */
 }
 
 .panel {
@@ -308,17 +308,27 @@ h1.title {
 
 /* Small button variant for compact controls like leaderboard actions */
 .btn--sm {
-  padding: 0.35rem 0.6rem;
-  font-size: 0.8rem;
-  border-radius: 8px;
-  min-width: 64px;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    min-width: 64px;
 }
 
 /* Ensure leaderboard controls wrap nicely on small viewports */
 @media (max-width: 480px) {
-  .lb-controls { gap: 0.4rem; margin-top: 0.6rem }
-  .lb-controls .btn { flex: 1 1 auto; min-width: 48%; text-align: center }
-  .btn--sm { min-width: 48%; padding: 0.45rem 0.6rem }
+    .lb-controls {
+        gap: 0.4rem;
+        margin-top: 0.6rem;
+    }
+    .lb-controls .btn {
+        flex: 1 1 auto;
+        min-width: 48%;
+        text-align: center;
+    }
+    .btn--sm {
+        min-width: 48%;
+        padding: 0.45rem 0.6rem;
+    }
 }
 
 .btn--active {
@@ -349,8 +359,16 @@ h1.title {
 .top-row {
     width: 100%;
     display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     align-items: center;
     justify-content: space-between;
+}
+
+.top-btns {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .progress {
@@ -742,18 +760,17 @@ h1.title {
 
 /* Responsive layout adjustments */
 @media (max-width: 1400px) {
-  .app {
-    gap: 5rem;
-  }
+    .app {
+        gap: 5rem;
+    }
 }
 
 @media (max-width: 1024px) {
-  .app {
-    gap: 3rem;
-    grid-template-columns: 1fr; /* stack panel on top */
-  }
+    .app {
+        gap: 3rem;
+        grid-template-columns: 1fr; /* stack panel on top */
+    }
 }
-
 
 @media (max-width: 1100px) {
     body {
@@ -764,6 +781,10 @@ h1.title {
         gap: 1.5rem;
         max-width: 900px;
         grid-template-columns: 280px 1fr;
+    }
+
+    .top-btns{
+        flex-direction: column;
     }
 
     .panel.leaderboard {
@@ -794,8 +815,8 @@ h1.title {
         max-width: 900px;
     }
 
-    .lb-controls{
-      grid-template-columns: 1fr 1fr;
+    .lb-controls {
+        grid-template-columns: 1fr 1fr;
     }
 }
 @media (max-width: 900px) {
@@ -847,8 +868,8 @@ h1.title {
         padding: 1rem;
     }
 
-    .lb-controls{
-      grid-template-columns: repeat(4 , 1fr );
+    .lb-controls {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 @media (max-width: 680px) {
@@ -990,7 +1011,7 @@ h1.title {
     }
 
     .panel {
-        padding: 1rem; 
+        padding: 1rem;
     }
 
     .controls {
@@ -1049,7 +1070,6 @@ h1.title {
     .footer-info {
         font-size: 0.7rem;
     }
-    
 }
 @media (max-width: 360px) {
     .card {

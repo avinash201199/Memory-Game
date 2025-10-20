@@ -99,19 +99,22 @@
     </aside>
 
     <main class="game">
-      <div class="top-row">
+      <div class="top-row" >
         <div class="progress">Find all pairs — Good luck, Vault Dweller.</div>
-        <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
-          <div style="color:var(--muted)">Difficulty:</div>
-          <button class="btn difficulty-btn" data-diff="easy">Easy</button>
-          <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
-          <button class="btn difficulty-btn" data-diff="hard">Hard</button>
-        </div>
-        
-        <!-- Small controls: Mute and Play Demo -->
-        <div style="display:flex;gap:0.5rem;align-items:center">
-          <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
-          <button class="btn ghost" id="playDemo">Play Demo</button>
+        <div class="top-btns" >
+
+          <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
+            <div style="color:var(--muted)">Difficulty:</div>
+            <button class="btn difficulty-btn" data-diff="easy">Easy</button>
+            <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
+            <button class="btn difficulty-btn" data-diff="hard">Hard</button>
+          </div>
+          
+          <!-- Small controls: Mute and Play Demo -->
+          <div style="display:flex;gap:0.5rem;align-items:center">
+            <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
+            <button class="btn ghost" id="playDemo">Play Demo</button>
+          </div>
         </div>
       </div>
 

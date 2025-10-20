@@ -785,6 +785,7 @@ h1.title {
 
     .top-btns{
         flex-direction: column;
+        align-items: center;
     }
 
     .panel.leaderboard {

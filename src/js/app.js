@@ -175,6 +175,9 @@
       timeEl.textContent = formatTime(Math.floor(timeLeft / 60), timeLeft % 60);
       const pct = Math.max(0, (timeLeft / timeTotal) * 100);
       timerBarFill.style.width = pct + '%';
+      if (timeLeft === 10) {
+         alert("Hurry up! Only 10 seconds left!");
+      }
     }, 1000);
   }
   function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null } }

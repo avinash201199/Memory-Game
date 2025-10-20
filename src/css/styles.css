@@ -68,13 +68,14 @@ body {
 }
 
 .app {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 2rem;
-    align-items: start;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 8rem; /* clear separation */
+  align-items: start;
+   justify-content: center; /*neat alignment */
 }
 
 .panel {
@@ -303,6 +304,21 @@ h1.title {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.04);
     color: var(--muted);
+}
+
+/* Small button variant for compact controls like leaderboard actions */
+.btn--sm {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  min-width: 64px;
+}
+
+/* Ensure leaderboard controls wrap nicely on small viewports */
+@media (max-width: 480px) {
+  .lb-controls { gap: 0.4rem; margin-top: 0.6rem }
+  .lb-controls .btn { flex: 1 1 auto; min-width: 48%; text-align: center }
+  .btn--sm { min-width: 48%; padding: 0.45rem 0.6rem }
 }
 
 .btn--active {
@@ -724,6 +740,21 @@ h1.title {
     font-size: 0.75rem;
 }
 
+/* Responsive layout adjustments */
+@media (max-width: 1400px) {
+  .app {
+    gap: 5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app {
+    gap: 3rem;
+    grid-template-columns: 1fr; /* stack panel on top */
+  }
+}
+
+
 @media (max-width: 1100px) {
     body {
         padding: 2rem 1.5rem;
@@ -949,13 +980,17 @@ h1.title {
     }
 
     .deck {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 10px;
         padding: 0.4rem;
     }
 
     .card {
         width: min(100%, 140px);
+    }
+
+    .panel {
+        padding: 1rem; 
     }
 
     .controls {
@@ -994,6 +1029,11 @@ h1.title {
         min-width: 100px;
         padding: 0.6rem;
         font-size: 0.9rem;
+    }
+
+    .footer {
+        padding: 1rem;
+        margin: 1.5rem auto 0;
     }
 
     .footer-content {

@@ -73,6 +73,8 @@
   let moveLimitEnabled = false;
   let moveLimitMax = 0;
   let remainingMoves = 0;
+  // NEW: State for hint penalty
+  let hintUsed = false; 
 
   // toggle listener
   moveLimitToggle.addEventListener('change', () => {
@@ -283,9 +285,18 @@
     pairsEl.textContent = `${matched} / ${totalTiles}`;
     // star logic per difficulty thresholds
     const [threeThresh, twoThresh] = difficulties[selectedDifficulty].stars;
-    if (moves <= threeThresh) starCount = 3;
-    else if (moves <= twoThresh) starCount = 2;
-    else starCount = 1;
+    let newStarCount;
+    if (moves <= threeThresh) newStarCount = 3;
+    else if (moves <= twoThresh) newStarCount = 2;
+    else newStarCount = 1;
+
+    // Apply Hint Penalty: Cap stars at 2 if hint was used, effectively preventing 3 stars.
+    if (hintUsed && newStarCount === 3) {
+      newStarCount = 2;
+    }
+    
+    starCount = newStarCount;
+    
     Array.from(starsEl.children).forEach((el, idx) => {
       el.classList.toggle('star--lost', idx + 1 > starCount);
     });
@@ -299,6 +310,8 @@
     matched = 0;
     moves = 0;
     starCount = 3;
+    // NEW: Reset hint state
+    hintUsed = false;
     updateUI();
     started = false;
     // enable hint based on difficulty
@@ -435,6 +448,11 @@
   function showWinModal() {
     modalTitle.textContent = 'CONGRATULATIONS, Vault Dweller';
     modalMessage.textContent = 'You matched all pairs — Vault‑Tec is proud.';
+    // Add warning if hint was used
+    if (hintUsed) {
+      modalMessage.textContent += ' (Note: Hint used, score capped at 2 Stars.)';
+    }
+
     modalStats.innerHTML = '';
     const elapsed = timeTotal - timeLeft;
     modalStats.appendChild(statCard('Time', formatTime(Math.floor(elapsed / 60), elapsed % 60)));
@@ -485,6 +503,14 @@
 
   // hint
   hintBtn.addEventListener('click', () => {
+    // Apply Hint Penalty
+    if (hintBtn.style.display !== 'none' && !locked) {
+        moves += 10; // Penalty: +10 moves
+        hintUsed = true; // Penalty: Mark hint as used
+        updateUI(); // Reflect the penalty in the score
+        playTone(150, 0.10); // Play a negative tone for penalty
+    }
+
     const nodes = Array.from(deckEl.querySelectorAll('.card:not(.matched):not(.is-flip)'));
     if (nodes.length < 2) return;
     const grouped = {};

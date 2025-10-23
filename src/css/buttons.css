@@ -1,19 +1,21 @@
-/* Game Button Styles */
+/*--------------------------
+  Game Button Styles
+--------------------------*/
 .btn {
-    background: linear-gradient(180deg, var(--vault-blue), rgba(var(--vault-blue-rgb), 0.9));
+    background: linear-gradient(145deg, var(--vault-blue), rgba(var(--vault-blue-rgb), 0.85));
     color: var(--vault-yellow);
     border: 2px solid var(--vault-yellow);
-    border-radius: 8px;
-    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    padding: 0.65rem 1.3rem;
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), inset 0 -2px 6px rgba(255, 255, 255, 0.1);
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -22,16 +24,40 @@
     background: transparent;
     border: 2px solid var(--vault-yellow);
     color: var(--vault-yellow);
+    box-shadow: 0 0 10px rgba(var(--vault-blue-rgb), 0.3), 0 0 8px var(--vault-yellow);
+    transition: all 0.4s ease;
 }
 
-/* Hover effects */
+.btn.ghost:hover {
+    box-shadow: 0 0 18px var(--vault-yellow), 0 0 30px rgba(var(--vault-blue-rgb), 0.6);
+    transform: translateY(-2px) scale(1.03);
+}
+
+/* Neon glow pulse for ghost button */
+.btn.ghost::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 8px var(--vault-yellow), 0 0 12px rgba(var(--vault-blue-rgb), 0.4);
+    opacity: 0;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.btn.ghost:hover::before {
+    opacity: 0.6;
+    animation: ghostGlowPulse 1.5s infinite alternate;
+}
+
+/* Hover glow + neon trail */
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--accent-glow),
-                0 6px 20px rgba(var(--vault-blue-rgb), 0.4);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 15px var(--vault-yellow),
+                0 0 25px rgba(var(--vault-blue-rgb), 0.6),
+                0 6px 20px rgba(var(--vault-blue-rgb), 0.5);
 }
 
-.btn:hover::before {
+.btn::after {
     content: '';
     position: absolute;
     top: 0;
@@ -39,64 +65,97 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        90deg,
+        120deg,
         transparent,
-        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2),
         transparent
     );
-    animation: shine 1.5s infinite;
+    transform: skewX(-25deg);
+}
+
+.btn:hover::after {
+    animation: neonShine 1.2s forwards;
 }
 
 /* Active state */
 .btn:active {
-    transform: translateY(1px);
-    box-shadow: var(--accent-glow-intense);
+    transform: translateY(1px) scale(0.97);
+    box-shadow: var(--accent-glow-intense), inset 0 -2px 6px rgba(255,255,255,0.2);
 }
 
-/* Difficulty buttons specific styles */
+/*--------------------------
+  Difficulty Buttons
+--------------------------*/
 .difficulty-btn {
     min-width: 100px;
     text-align: center;
-    padding: 0.5rem 1rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .difficulty-btn.btn--active {
     background: var(--vault-yellow);
     color: var(--vault-blue);
     border-color: var(--vault-yellow);
-    box-shadow: var(--accent-glow-intense);
+    box-shadow: 0 0 15px var(--vault-yellow), 0 0 25px rgba(var(--vault-blue-rgb), 0.5);
 }
 
 .difficulty-btn:hover {
-    background: linear-gradient(180deg, 
-        rgba(var(--vault-blue-rgb), 0.95), 
-        rgba(var(--vault-blue-rgb), 0.85)
-    );
+    background: linear-gradient(145deg, rgba(var(--vault-blue-rgb), 0.95), rgba(var(--vault-blue-rgb), 0.85));
 }
 
 .difficulty-btn.btn--active:hover {
-    background: var(--vault-yellow);
-    transform: translateY(0);
+    transform: scale(1.03);
 }
 
-/* Animations */
+/*--------------------------
+  Animations
+--------------------------*/
 @keyframes shine {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+@keyframes glowPulse {
     0% {
-        left: -100%;
-    }
-    20% {
-        left: 100%;
+        box-shadow: 0 0 8px var(--vault-yellow), 0 0 15px rgba(var(--vault-blue-rgb), 0.3);
     }
     100% {
-        left: 100%;
+        box-shadow: 0 0 20px var(--vault-yellow), 0 0 30px rgba(var(--vault-blue-rgb), 0.5);
     }
 }
 
-/* Responsive adjustments */
+@keyframes ghostGlowPulse {
+    0% {
+        box-shadow: 0 0 6px var(--vault-yellow), 0 0 12px rgba(var(--vault-blue-rgb), 0.4);
+    }
+    50% {
+        box-shadow: 0 0 12px var(--vault-yellow), 0 0 24px rgba(var(--vault-blue-rgb), 0.6);
+    }
+    100% {
+        box-shadow: 0 0 8px var(--vault-yellow), 0 0 18px rgba(var(--vault-blue-rgb), 0.5);
+    }
+}
+
+@keyframes neonShine {
+    0% { left: -100%; opacity: 0; }
+    50% { left: 100%; opacity: 0.6; }
+    100% { left: 200%; opacity: 0; }
+}
+
+/*--------------------------
+  Responsive Adjustments
+--------------------------*/
 @media (max-width: 768px) {
     .btn {
         padding: 0.5rem 1rem;
-        font-size: 0.9rem;
+        font-size: 0.88rem;
     }
     
     .difficulty-btn {
@@ -107,8 +166,8 @@
 
 @media (max-width: 480px) {
     .btn {
-        padding: 0.4rem 0.9rem;
-        font-size: 0.85rem;
+        padding: 0.4rem 0.85rem;
+        font-size: 0.82rem;
     }
     
     .difficulty-btn {
@@ -117,30 +176,30 @@
     }
 }
 
-/* Prevent text selection */
-.btn {
+/*--------------------------
+  User Select / Touch Optimizations
+--------------------------*/
+.btn, .difficulty-btn {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-/* Touch device optimizations */
 @media (hover: none) {
-    .btn:hover {
+    .btn:hover, .difficulty-btn:hover {
         transform: none;
         box-shadow: none;
     }
-    
-    .btn:hover::before {
+    .btn:hover::before, .difficulty-btn:hover::before {
+        animation: none;
+        opacity: 0;
+    }
+    .btn:hover::after, .difficulty-btn:hover::after {
         animation: none;
     }
-    
-    .btn:active {
+    .btn:active, .difficulty-btn:active {
         transform: scale(0.98);
-        background: linear-gradient(180deg, 
-            rgba(var(--vault-blue-rgb), 0.9), 
-            rgba(var(--vault-blue-rgb), 0.8)
-        );
+        background: linear-gradient(145deg, rgba(var(--vault-blue-rgb), 0.9), rgba(var(--vault-blue-rgb), 0.8));
     }
 }

@@ -1,24 +1,19 @@
 /* Game Button Styles */
 .btn {
-  background: linear-gradient(
-    180deg,
-    var(--vault-blue),
-    rgba(var(--vault-blue-rgb), 0.9)
-  );
-  color: var(--vault-yellow);
-  border: 2px solid var(--vault-yellow);
-  border-radius: 8px;
-  padding: 0.6rem 1.2rem;
-  font-family: "Share Tech Mono", monospace;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  -webkit-tap-highlight-color: transparent;
+    background: linear-gradient(180deg, var(--vault-blue), rgba(var(--vault-blue-rgb), 0.9));
+    color: var(--vault-yellow);
+    border: 2px solid var(--vault-yellow);
+    border-radius: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Ghost button variant */

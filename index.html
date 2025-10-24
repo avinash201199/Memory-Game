@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vault‑Tec Memory — Pip‑Boy Edition</title>
+  <title>Vault-Tec Memory — Pip-Boy Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
@@ -16,13 +16,13 @@
 </head>
 
 <body onload="initTheme()">
-  <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
+  <div class="app" role="application" aria-label="Vault-Tec Memory Game">
     <aside class="panel" aria-hidden="false">
       <div class="brand">
         <div class="vault-badge"><img src="img/LogoMain.png"></div>
         <div>
-          <h1 class="title">Vault‑Tec Memory</h1>
-          <div class="subtitle">Pip‑Boy Training — Find all Tech Pairs</div>
+          <h1 class="title">Vault-Tec Memory</h1>
+          <div class="subtitle">Pip-Boy Training — Find all Tech Pairs</div>
         </div>
       </div>
 
@@ -77,28 +77,28 @@
           <button class="btn ghost" id="hint">Reveal 1 Pair</button>
         </div>
 
-        <div class="hint">Tip: Try to remember positions — the Pip‑Boy rewards patience.</div>
+        <div class="hint">Tip: Try to remember positions — the Pip-Boy rewards patience.</div>
         
         <div style="margin-top:0.8rem">
           <div class="label">Leaderboard</div>
           <div class="lb-list" id="leaderboardList"></div>
-          <div class="lb-controls">
-            <button class="btn ghost" id="openHighScores">High Scores</button>
-            <button class="btn ghost" id="exportLb">Export</button>
-            <button class="btn ghost" id="shareLb">Share</button>
-            <button class="btn ghost" id="clearLb">Clear</button>
+          <div class="lb-controls" role="group" aria-label="Leaderboard actions">
+            <button class="btn ghost btn--sm" id="openHighScores" title="View full high scores" aria-label="Open high scores">High Scores</button>
+            <button class="btn ghost btn--sm" id="exportLb" title="Export leaderboard as JSON" aria-label="Export leaderboard">Export</button>
+            <button class="btn ghost btn--sm" id="shareLb" title="Share leaderboard via link" aria-label="Share leaderboard">Share</button>
+            <button class="btn ghost btn--sm" id="clearLb" title="Clear leaderboard" aria-label="Clear leaderboard">Clear</button>
           </div>
         </div>
       </div>
 
       <div style="margin-top:1rem;font-size:0.85rem;color:#89a6cf;display:flex;gap:0.6rem;align-items:center">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2v6" stroke="#ffd23f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 8c1-6 14-6 14 0" stroke="#89a6cf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        <div>Designed with Vault‑Tec aesthetics — blue panels, bold yellow accents and terminal fonts.</div>
+        <div>Designed with Vault-Tec aesthetics — blue panels, bold yellow accents and terminal fonts.</div>
       </div>
     </aside>
 
     <main class="game">
-      <div class="top-row">
+      <div class="top-row" >
         <div class="progress">Find all pairs — Good luck, Vault Dweller.</div>
         <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
           <div style="color:var(--muted)">Difficulty:</div>
@@ -110,6 +110,20 @@
         <div style="display:flex;gap:0.5rem;align-items:center">
           <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
           <button class="btn ghost" id="playDemo">Play Demo</button>
+        <div class="top-btns" >
+
+          <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
+            <div style="color:var(--muted)">Difficulty:</div>
+            <button class="btn difficulty-btn" data-diff="easy">Easy</button>
+            <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
+            <button class="btn difficulty-btn" data-diff="hard">Hard</button>
+          </div>
+          
+          <!-- Small controls: Mute and Play Demo -->
+          <div style="display:flex;gap:0.5rem;align-items:center">
+            <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
+            <button class="btn ghost" id="playDemo">Play Demo</button>
+          </div>
         </div>
       </div>
 
@@ -125,17 +139,17 @@
   </div>
   <div class="page-container">
 
-    <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
+    <div class="app" role="application" aria-label="Vault-Tec Memory Game">
       </div>
 
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-brand">
-          <div class="vault-badge vault-badge--small">VT</div>
+          <div class="vault-badge vault-badge--small"><img src="img/LogoMain.png"></div>
           <span>Vault-Tec Memory Trainer | Pip-Boy Edition</span>
         </div>
         <div class="footer-info">
-          Designed & Built for Educational Purposes
+          This App is designed and build for educational purposes         <!--redifened the footer content-->
         </div>
       </div>
     </footer>

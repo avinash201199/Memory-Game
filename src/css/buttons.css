@@ -18,129 +18,132 @@
 
 /* Ghost button variant */
 .btn.ghost {
-    background: transparent;
-    border: 2px solid var(--vault-yellow);
-    color: var(--vault-yellow);
-    margin: 0.2rem 0.2rem;
+  background: transparent;
+  border: 2px solid var(--vault-yellow);
+  color: var(--vault-yellow);
+  /* text-align: center; */
+  text-align: center;
+  padding: 0.5rem 1rem;
 }
 
 /* Hover effects */
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--accent-glow),
-                0 6px 20px rgba(var(--vault-blue-rgb), 0.4);
+  transform: translateY(-2px);
+  box-shadow: var(--accent-glow), 0 6px 20px rgba(var(--vault-blue-rgb), 0.4);
 }
 
 .btn:hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    animation: shine 1.5s infinite;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shine 1.5s infinite;
 }
 
 /* Active state */
 .btn:active {
-    transform: translateY(1px);
-    box-shadow: var(--accent-glow-intense);
+  transform: translateY(1px);
+  box-shadow: var(--accent-glow-intense);
 }
 
 /* Difficulty buttons specific styles */
 .difficulty-btn {
-    min-width: 100px;
-    text-align: center;
-    padding: 0.5rem 1rem;
+  min-width: 100px;
+  text-align: center;
+  padding: 0.5rem 1rem;
 }
 
 .difficulty-btn.btn--active {
-    background: var(--vault-yellow);
-    color: var(--vault-blue);
-    border-color: var(--vault-yellow);
-    box-shadow: var(--accent-glow-intense);
+  background: var(--vault-yellow);
+  color: var(--vault-blue);
+  border-color: var(--vault-yellow);
+  box-shadow: var(--accent-glow-intense);
 }
 
 .difficulty-btn:hover {
-    background: linear-gradient(180deg, 
-        rgba(var(--vault-blue-rgb), 0.95), 
-        rgba(var(--vault-blue-rgb), 0.85)
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(var(--vault-blue-rgb), 0.95),
+    rgba(var(--vault-blue-rgb), 0.85)
+  );
 }
 
 .difficulty-btn.btn--active:hover {
-    background: var(--vault-yellow);
-    transform: translateY(0);
+  background: var(--vault-yellow);
+  transform: translateY(0);
 }
 
 /* Animations */
 @keyframes shine {
-    0% {
-        left: -100%;
-    }
-    20% {
-        left: 100%;
-    }
-    100% {
-        left: 100%;
-    }
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
-    
-    .difficulty-btn {
-        min-width: 90px;
-        padding: 0.4rem 0.8rem;
-    }
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .difficulty-btn {
+    min-width: 90px;
+    padding: 0.4rem 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .btn {
-        padding: 0.4rem 0.9rem;
-        font-size: 0.85rem;
-    }
-    
-    .difficulty-btn {
-        min-width: 80px;
-        padding: 0.35rem 0.7rem;
-    }
+  .btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .difficulty-btn {
+    min-width: 80px;
+    padding: 0.35rem 0.7rem;
+  }
 }
 
 /* Prevent text selection */
 .btn {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Touch device optimizations */
 @media (hover: none) {
-    .btn:hover {
-        transform: none;
-        box-shadow: none;
-    }
-    
-    .btn:hover::before {
-        animation: none;
-    }
-    
-    .btn:active {
-        transform: scale(0.98);
-        background: linear-gradient(180deg, 
-            rgba(var(--vault-blue-rgb), 0.9), 
-            rgba(var(--vault-blue-rgb), 0.8)
-        );
-    }
+  .btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn:hover::before {
+    animation: none;
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+    background: linear-gradient(
+      180deg,
+      rgba(var(--vault-blue-rgb), 0.9),
+      rgba(var(--vault-blue-rgb), 0.8)
+    );
+  }
 }

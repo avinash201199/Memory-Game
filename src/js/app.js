@@ -29,6 +29,7 @@
   const restartBtn = document.getElementById('restart');
   const restartBottom = document.getElementById('restart-bottom');
   const hintBtn = document.getElementById('hint');
+  const shuffleBoardBtn = document.getElementById('shuffleBoard');
   const modal = document.getElementById('modalOverlay');
   const playAgainBtn = document.getElementById('playAgain');
   const closeModalBtn = document.getElementById('closeModal');
@@ -73,6 +74,7 @@
   let moveLimitEnabled = false;
   let moveLimitMax = 0;
   let remainingMoves = 0;
+  let shuffleUsed = false;
 
   // toggle listener
   moveLimitToggle.addEventListener('change', () => {
@@ -302,10 +304,14 @@
     matched = 0;
     moves = 0;
     starCount = 3;
+    shuffleUsed = false;
     updateUI();
     started = false;
     // enable hint based on difficulty
     hintBtn.style.display = difficulties[selectedDifficulty].hideHint ? 'none' : '';
+    // enable shuffle button for new game
+    shuffleBoardBtn.disabled = false;
+    shuffleBoardBtn.textContent = 'Shuffle Board';
     // ensure cards are interactive
     Array.from(deckEl.querySelectorAll('.card')).forEach(c => { c.removeAttribute('aria-disabled'); c.classList.remove('matched', 'is-flip'); });
     locked = false;
@@ -497,6 +503,76 @@
     const [c1, c2] = grouped[key];
     c1.classList.add('is-flip'); c2.classList.add('is-flip');
     setTimeout(() => { c1.classList.remove('is-flip'); c2.classList.remove('is-flip'); playTone(440, 0.08); }, 900);
+  });
+
+  // shuffle board power-up
+  shuffleBoardBtn.addEventListener('click', () => {
+    if (shuffleUsed || locked) return;
+    
+    // Get all unmatched cards
+    const unmatchedCards = Array.from(deckEl.querySelectorAll('.card:not(.matched)'));
+    if (unmatchedCards.length < 2) return;
+    
+    // Prevent interactions during shuffle
+    locked = true;
+    shuffleUsed = true;
+    shuffleBoardBtn.disabled = true;
+    shuffleBoardBtn.textContent = 'Used';
+    
+    // Flip all unmatched cards face down first
+    unmatchedCards.forEach(card => {
+      if (card.classList.contains('is-flip')) {
+        card.classList.remove('is-flip');
+      }
+    });
+    
+    // Clear opened cards array
+    opened = [];
+    
+    // Add shuffle animation to all unmatched cards
+    unmatchedCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('shuffling');
+        playTone(300 + (index * 20), 0.05); // Rising tone sequence
+      }, index * 50);
+    });
+    
+    // Shuffle the card positions after animation starts
+    setTimeout(() => {
+      // Get current data-src values of unmatched cards
+      const cardData = unmatchedCards.map(card => card.getAttribute('data-src'));
+      
+      // Shuffle the data array
+      const shuffledData = shuffle([...cardData]);
+      
+      // Reassign shuffled data to cards
+      unmatchedCards.forEach((card, index) => {
+        card.setAttribute('data-src', shuffledData[index]);
+        const altText = shuffledData[index].split('.').slice(0, -1).join('.');
+        card.setAttribute('aria-label', `Card: ${altText}`);
+        
+        // Update the image in the card-front
+        const img = card.querySelector('.card-front img');
+        if (img) {
+          img.src = `img/${shuffledData[index]}`;
+          img.alt = altText;
+        }
+      });
+      
+      // Deduct points for using the power-up
+      moves += 2;
+      updateUI();
+      
+      playTone(800, 0.15); // Success tone
+    }, 400);
+    
+    // Remove shuffle animation and unlock after animation completes
+    setTimeout(() => {
+      unmatchedCards.forEach(card => {
+        card.classList.remove('shuffling');
+      });
+      locked = false;
+    }, 800);
   });
 
   // restart & modal handlers

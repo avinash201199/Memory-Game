@@ -226,6 +226,33 @@ h1.title {
   display: flex;
   gap: 0.6rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.controls .btn {
+  flex: 1;
+  min-width: 120px;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  font-size: 0.85rem;
+}
+
+/* Shuffle button styling */
+#shuffleBoard {
+  min-width: 120px;
+  text-align: center;
+}
+
+#shuffleBoard:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#shuffleBoard:not(:disabled):hover {
+  background: linear-gradient(90deg, rgba(255, 210, 63, 0.1), rgba(255, 210, 63, 0.05));
+  border-color: rgba(255, 210, 63, 0.3);
+  color: var(--vault-yellow);
 }
 
 .btn.ghost#playDemo {
@@ -573,6 +600,30 @@ h1.title {
   }
 }
 
+/* Shuffle animation for cards */
+.card.shuffling {
+  animation: shuffleMove 0.8s ease-in-out;
+  z-index: 10;
+}
+
+@keyframes shuffleMove {
+  0% {
+    transform: translateY(0) scale(1) rotateZ(0deg);
+  }
+  25% {
+    transform: translateY(-20px) scale(0.9) rotateZ(-5deg);
+  }
+  50% {
+    transform: translateY(-30px) scale(0.8) rotateZ(5deg);
+  }
+  75% {
+    transform: translateY(-20px) scale(0.9) rotateZ(-2deg);
+  }
+  100% {
+    transform: translateY(0) scale(1) rotateZ(0deg);
+  }
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -728,7 +779,54 @@ h1.title {
     padding: 1rem 0;
   }
   .star { width: 34px; height: 28px; }
+  
+  /* Better button responsiveness for medium screens */
+  .controls {
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .controls .btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.6rem;
+    min-width: 100px;
+    flex: 1 1 auto;
+  }
 }
+
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .controls .btn {
+    width: 100%;
+    flex: none;
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    text-align: center;
+    min-width: auto;
+    white-space: normal;
+    overflow: visible;
+  }
+}
+/* Specific breakpoint for button text visibility */
+@media (max-width: 380px) {
+  .controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .controls .btn {
+    width: 100%;
+    flex: none;
+    min-width: auto;
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+
 @media (max-width: 480px) {
   .deck {
     grid-template-columns: repeat(3, 1fr);
@@ -742,9 +840,15 @@ h1.title {
   }
   .controls {
     flex-direction: column;
+    gap: 0.5rem;
   }
-  .btn {
+  .controls .btn {
     width: 100%;
+    flex: none;
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    text-align: center;
+    white-space: normal;
   }
   .footer {
     padding: 1rem;
@@ -754,6 +858,15 @@ h1.title {
     font-size: 0.8rem;
     flex-direction: column;
     gap: 0.3rem;
+  }
+}
+
+/* Ensure buttons don't get too small on narrow screens */
+@media (max-width: 320px) {
+  .controls .btn {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    min-height: 40px;
   }
 }
 /* Responsive layout adjustments */

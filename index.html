@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vault‑Tec Memory — Pip‑Boy Edition</title>
+  <title>Vault-Tec Memory — Pip-Boy Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
@@ -101,19 +101,22 @@
 </aside>
 
     <main class="game">
-      <div class="top-row">
+      <div class="top-row" >
         <div class="progress">Find all pairs — Good luck, Vault Dweller.</div>
-        <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
-          <div style="color:var(--muted)">Difficulty:</div>
-          <button class="btn difficulty-btn" data-diff="easy">Easy</button>
-          <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
-          <button class="btn difficulty-btn" data-diff="hard">Hard</button>
-        </div>
-        
-        <!-- Small controls: Mute and Play Demo -->
-        <div style="display:flex;gap:0.5rem;align-items:center">
-          <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
-          <button class="btn ghost" id="playDemo">Play Demo</button>
+        <div class="top-btns" >
+
+          <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
+            <div style="color:var(--muted)">Difficulty:</div>
+            <button class="btn difficulty-btn" data-diff="easy">Easy</button>
+            <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
+            <button class="btn difficulty-btn" data-diff="hard">Hard</button>
+          </div>
+          
+          <!-- Small controls: Mute and Play Demo -->
+          <div style="display:flex;gap:0.5rem;align-items:center">
+            <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
+            <button class="btn ghost" id="playDemo">Play Demo</button>
+          </div>
         </div>
       </div>
 
@@ -130,17 +133,17 @@
   </div>
   <div class="page-container">
 
-    <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
+    <div class="app" role="application" aria-label="Vault-Tec Memory Game">
       </div>
 
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-brand">
-          <div class="vault-badge vault-badge--small">VT</div>
+          <div class="vault-badge vault-badge--small"><img src="img/LogoMain.png"></div>
           <span>Vault-Tec Memory Trainer | Pip-Boy Edition</span>
         </div>
         <div class="footer-info">
-          Designed & Built for Educational Purposes
+          This App is designed and build for educational purposes         <!--redifened the footer content-->
         </div>
       </div>
     </footer>

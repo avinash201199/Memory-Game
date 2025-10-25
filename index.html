@@ -16,87 +16,89 @@
 </head>
 
 <body onload="initTheme()">
-  <div class="app" role="application" aria-label="Vault-Tec Memory Game">
-    <aside class="panel" aria-hidden="false">
-      <div class="brand">
-        <div class="vault-badge"><img src="img/LogoMain.png"></div>
-        <div>
-          <h1 class="title">Vault-Tec Memory</h1>
-          <div class="subtitle">Pip-Boy Training — Find all Tech Pairs</div>
+  <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
+ <aside class="panel" aria-hidden="false">
+  <div class="brand">
+    <div class="vault-badge"><img src="img/LogoMain.png"></div>
+    <div>
+      <h1 class="title">Vault‑Tec Memory</h1>
+      <div class="subtitle">Pip‑Boy Training — Find all Tech Pairs</div>
+    </div>
+  </div>
+
+  <div class="theme-toggle">
+    <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
+      <span class="theme-icon light">☀️</span>
+      <span class="theme-icon dark">🌙</span>
+    </button>
+  </div>
+
+  <div class="score-box">
+    <div class="score-row">
+      <div>
+        <div class="label">Moves</div>
+        <div class="score-big" id="moves">0</div>
+      </div>
+      <div>
+        <div class="label">Time</div>
+        <div class="score-big" id="time">00:00</div>
+        <div class="timer-bar" aria-hidden="true"><div id="timerBar" class="timer-bar-fill"></div></div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem">
+      <div>
+        <div class="label">Star Rating</div>
+        <div class="stars" id="star-rating">
+          <div class="star" data-star="1">★</div>
+          <div class="star" data-star="2">★</div>
+          <div class="star" data-star="3">★</div>
         </div>
       </div>
 
-      <div class="theme-toggle">
-        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
-          <span class="theme-icon light">☀️</span>
-          <span class="theme-icon dark">🌙</span>
-        </button>
+      <div style="text-align:right">
+        <div class="label">Pairs</div>
+        <div class="score-big" id="pairs">0 / 8</div>
       </div>
+    </div>
 
-      <div class="score-box">
-        <div class="score-row">
-          <div>
-            <div class="label">Moves</div>
-            <div class="score-big" id="moves">0</div>
-          </div>
-          <div>
-            <div class="label">Time</div>
-            <div class="score-big" id="time">00:00</div>
-            <div class="timer-bar" aria-hidden="true"><div id="timerBar" class="timer-bar-fill"></div></div>
-          </div>
-        </div>
+    <div style="margin-top:1.2rem;padding:0.8rem 0;border-top:1px solid rgba(137, 166, 207, 0.2)">
+      <label for="move-limit-toggle" style="display:flex;align-items:center;gap:0.5rem;cursor:pointer">
+        <input type="checkbox" id="move-limit-toggle" />
+        <span>Enable Move Limit</span>
+      </label>
+    </div>
+    <div id="move-limit-display" style="display:none;margin-top:0.6rem;padding:0.6rem;background:rgba(255, 210, 63, 0.1);border-radius:4px;color:var(--muted);font-size:0.9rem">
+      Moves: <span id="remaining-moves"></span> remaining
+    </div>
 
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:0.6rem">
-          <div>
-            <div class="label">Star Rating</div>
-            <div class="stars" id="star-rating">
-              <div class="star" data-star="1">★</div>
-              <div class="star" data-star="2">★</div>
-              <div class="star" data-star="3">★</div>
-            </div>
-          </div>
+    <div class="controls" style="margin-top:1.2rem">
+      <button class="btn" id="restart">Restart</button>
+      <button class="btn ghost" id="hint">Reveal 1 Pair</button>
+    </div>
 
-          <div style="text-align:right">
-            <div class="label">Pairs</div>
-            <div class="score-big" id="pairs">0 / 8</div>
-          </div>
-        </div>
-
-        <div style="margin-top:0.8rem;display:flex;align-items:center;gap:0.4rem">
-          <label for="move-limit-toggle">
-            <input type="checkbox" id="move-limit-toggle" />
-            Enable Move Limit
-          </label>
-        </div>
-        <div id="move-limit-display" style="display:none ;margin-top:0.4rem;color:var(--muted);font-size:0.9rem">
-          Moves: <span id="remaining-moves"></span> remaining
-        </div>
-
-        <div class="controls">
-          <button class="btn" id="restart">Restart</button>
-          <button class="btn ghost" id="hint">Reveal 1 Pair</button>
-        </div>
-
-        <div class="hint">Tip: Try to remember positions — the Pip-Boy rewards patience.</div>
-        
-        <!-- Leaderboard (top-5 per difficulty) -->
-        <div style="margin-top:0.8rem">
-          <div class="label">Leaderboard</div>
-          <div class="lb-list" id="leaderboardList"></div>
-          <div class="lb-controls" role="group" aria-label="Leaderboard actions">
-            <button class="btn ghost btn--sm" id="openHighScores" title="View full high scores" aria-label="Open high scores">High Scores</button>
-            <button class="btn ghost btn--sm" id="exportLb" title="Export leaderboard as JSON" aria-label="Export leaderboard">Export</button>
-            <button class="btn ghost btn--sm" id="shareLb" title="Share leaderboard via link" aria-label="Share leaderboard">Share</button>
-            <button class="btn ghost btn--sm" id="clearLb" title="Clear leaderboard" aria-label="Clear leaderboard">Clear</button>
-          </div>
-        </div>
+    <div class="hint" style="margin-top:1rem;padding:0.8rem;background:rgba(137, 166, 207, 0.1);border-radius:4px">
+      Tip: Try to remember positions — the Pip‑Boy rewards patience.
+    </div>
+    
+    <!-- Leaderboard (top-5 per difficulty) -->
+    <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(137, 166, 207, 0.2)">
+      <div class="label" style="margin-bottom:0.8rem">Leaderboard</div>
+      <div class="lb-list" id="leaderboardList" style="margin-bottom:1rem"></div>
+      <div class="lb-controls" style="display:grid;grid-template-columns:repeat(2, 1fr);gap:0.5rem">
+        <button class="btn ghost" id="openHighScores">High Scores</button>
+        <button class="btn ghost" id="exportLb">Export</button>
+        <button class="btn ghost" id="shareLb">Share</button>
+        <button class="btn ghost" id="clearLb">Clear</button>
       </div>
+    </div>
+  </div>
 
-      <div style="margin-top:1rem;font-size:0.85rem;color:#89a6cf;display:flex;gap:0.6rem;align-items:center">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2v6" stroke="#ffd23f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 8c1-6 14-6 14 0" stroke="#89a6cf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        <div>Designed with Vault-Tec aesthetics — blue panels, bold yellow accents and terminal fonts.</div>
-      </div>
-    </aside>
+  <div style="margin-top:1.5rem;padding:1rem;background:rgba(137, 166, 207, 0.08);border-radius:6px;font-size:0.85rem;color:#89a6cf;display:flex;gap:0.8rem;align-items:flex-start">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><path d="M12 2v6" stroke="#ffd23f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 8c1-6 14-6 14 0" stroke="#89a6cf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    <div>Designed with Vault‑Tec aesthetics — blue panels, bold yellow accents and terminal fonts.</div>
+  </div>
+</aside>
 
     <main class="game">
       <div class="top-row" >

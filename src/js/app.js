@@ -175,12 +175,26 @@
       timeEl.textContent = formatTime(Math.floor(timeLeft / 60), timeLeft % 60);
       const pct = Math.max(0, (timeLeft / timeTotal) * 100);
       timerBarFill.style.width = pct + '%';
+
+      // Game-style urgent warning at 10 seconds
       if (timeLeft === 10) {
-         alert("Hurry up! Only 10 seconds left!");
+        playTone(800, 0.15); // warning sound
+        timeEl.classList.add('timer-critical');
+        timerBarFill.classList.add('timer-bar-critical');
+        document.body.classList.add('game-critical');
       }
     }, 1000);
   }
-  function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null } }
+  function stopTimer() {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+      // Remove critical state when timer stops
+      timeEl.classList.remove('timer-critical');
+      timerBarFill.classList.remove('timer-bar-critical');
+      document.body.classList.remove('game-critical');
+    }
+  }
   function resetTimer() {
     stopTimer();
     pairCount = Math.floor(difficulties[selectedDifficulty].tiles / 2);
@@ -189,6 +203,10 @@
     timeLeft = timeTotal;
     timeEl.textContent = formatTime(Math.floor(timeLeft / 60), timeLeft % 60);
     timerBarFill.style.width = '100%';
+    // Remove all critical classes
+    timeEl.classList.remove('timer-critical');
+    timerBarFill.classList.remove('timer-bar-critical');
+    document.body.classList.remove('game-critical');
   }
 
   // audio helpers (small tones using WebAudio)

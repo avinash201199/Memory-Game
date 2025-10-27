@@ -77,22 +77,20 @@
       <button class="btn ghost" id="hint">Reveal 1 Pair</button>
     </div>
 
-    <div class="hint" style="margin-top:1rem;padding:0.8rem;background:rgba(137, 166, 207, 0.1);border-radius:4px">
-      Tip: Try to remember positions — the Pip‑Boy rewards patience.
+<div class="hint" style="margin-top:1rem;padding:0.8rem;background:rgba(137, 166, 207, 0.1);border-radius:4px">
+      Tip: Try to remember positions — the Pip‑Boy rewards patience.
+    </div>
+    
+        <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(137, 166, 207, 0.2)">
+      <div class="label" style="margin-bottom:0.8rem">Leaderboard</div>
+      <div class="lb-list" id="leaderboardList" style="margin-bottom:1rem"></div>
+      <div class="lb-controls" role="group" aria-label="Leaderboard actions" style="display:grid;grid-template-columns:repeat(2, 1fr);gap:0.5rem">
+        <button class="btn ghost" id="openHighScores" title="View full high scores" aria-label="Open high scores">High Scores</button>
+        <button class="btn ghost" id="exportLb" title="Export leaderboard as JSON" aria-label="Export leaderboard">Export</button>
+        <button class="btn ghost" id="shareLb" title="Share leaderboard via link" aria-label="Share leaderboard">Share</button>
+        <button class="btn ghost" id="clearLb" title="Clear leaderboard" aria-label="Clear leaderboard">Clear</button>
+      </div>
     </div>
-    
-    <!-- Leaderboard (top-5 per difficulty) -->
-    <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(137, 166, 207, 0.2)">
-      <div class="label" style="margin-bottom:0.8rem">Leaderboard</div>
-      <div class="lb-list" id="leaderboardList" style="margin-bottom:1rem"></div>
-      <div class="lb-controls" style="display:grid;grid-template-columns:repeat(2, 1fr);gap:0.5rem">
-        <button class="btn ghost" id="openHighScores">High Scores</button>
-        <button class="btn ghost" id="exportLb">Export</button>
-        <button class="btn ghost" id="shareLb">Share</button>
-        <button class="btn ghost" id="clearLb">Clear</button>
-      </div>
-    </div>
-  </div>
 
   <div style="margin-top:1.5rem;padding:1rem;background:rgba(137, 166, 207, 0.08);border-radius:6px;font-size:0.85rem;color:#89a6cf;display:flex;gap:0.8rem;align-items:flex-start">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><path d="M12 2v6" stroke="#ffd23f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 8c1-6 14-6 14 0" stroke="#89a6cf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -103,6 +101,16 @@
     <main class="game">
       <div class="top-row" >
         <div class="progress">Find all pairs — Good luck, Vault Dweller.</div>
+        <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
+          <div style="color:var(--muted)">Difficulty:</div>
+          <button class="btn difficulty-btn" data-diff="easy">Easy</button>
+          <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
+          <button class="btn difficulty-btn" data-diff="hard">Hard</button>
+        </div>
+        
+        <div style="display:flex;gap:0.5rem;align-items:center">
+          <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
+          <button class="btn ghost" id="playDemo">Play Demo</button>
         <div class="top-btns" >
 
           <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
@@ -122,7 +130,6 @@
 
       <section class="deck" id="deck" aria-live="polite" aria-label="Game cards"></section>
 
-  <!-- confetti canvas used by the win animation -->
   <canvas id="confettiCanvas" aria-hidden="true"></canvas>
 
       <div style="width:100%;display:flex;align-items:center;justify-content:center">
@@ -163,7 +170,6 @@
     </div>
   </div>
 
-  <!-- High Scores Modal -->
   <div class="modal-overlay" id="highScoresOverlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-box" role="document">
       <h2>High Scores</h2>

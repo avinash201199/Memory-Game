@@ -312,6 +312,8 @@
     if (moveLimitEnabled) {
       setMoveLimitForDifficulty(selectedDifficulty);
     }
+     // Console log to track game resets
+     console.log(`Game reset — Difficulty: ${selectedDifficulty}, Total Tiles: ${totalTiles}`);
   }
 
   // card interactions

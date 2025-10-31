@@ -839,3 +839,33 @@ h1.title {
     grid-template-columns: 1fr; /* stack panel on top */
   }
 }
+.progress-container {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--vault-yellow), #f7c84b);
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.9rem;
+  color: var(--vault-yellow);
+}

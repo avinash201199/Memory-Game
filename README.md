@@ -149,8 +149,15 @@ If you have any questions, feel free to open an issue or reach out via the [What
 
 ## ✨ Difficulty Selection
 
-- The **selected difficulty** is highlighted in **yellow**.
-- The other levels remain **grey** for clarity.
+- The **selected difficulty** is highlighted in **yellow**.  
+- The other levels remain **grey** for clarity.  
+- The **highlighted difficulty** helps users easily identify their current selection.  
+- The **color contrast** (yellow vs. grey) ensures better **visual distinction** and **accessibility**.  
+- The **highlight updates dynamically** when a new difficulty level is chosen.  
+- The **design maintains consistency** across all devices and screen sizes.  
+- The **neutral grey tones** for unselected levels keep the interface clean and minimalistic.  
+- The **yellow highlight** serves as a visual cue to improve user focus and interaction feedback.
+- 
 
 ---
 

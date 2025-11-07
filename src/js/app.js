@@ -29,6 +29,15 @@
   const restartBtn = document.getElementById('restart');
   const restartBottom = document.getElementById('restart-bottom');
   const hintBtn = document.getElementById('hint');
+  
+  // ✅ --- START OF PAUSE/RESUME FIX ---
+  // Get the correct buttons from the side panel
+  const pauseBtn = document.getElementById('pause-btn');
+  const resumeBtn = document.getElementById('resume-btn');
+  // ❌ Delete the old reference
+  // const pauseResumeBtn = document.getElementById('pauseResume');
+  // ✅ --- END OF PAUSE/RESUME FIX ---
+
   const modal = document.getElementById('modalOverlay');
   const playAgainBtn = document.getElementById('playAgain');
   const closeModalBtn = document.getElementById('closeModal');
@@ -56,6 +65,7 @@
   let timeLeft = 0;
   let timeTotal = 60;
   let started = false;
+  let paused = false; // ✅ This is the flag we will use
   let pairCount = Math.floor(difficulties[selectedDifficulty].tiles / 2);
   let totalTiles = pairCount * 2;
   const confettiCanvas = document.getElementById('confettiCanvas');
@@ -170,13 +180,14 @@
   function startTimer() {
     if (timerId) return;
     timerId = setInterval(() => {
+      if (paused) return; // ⏸️ ✅ This line will now work correctly
       if (timeLeft <= 0) { stopTimer(); onTimeUp(); return; }
       timeLeft--;
       timeEl.textContent = formatTime(Math.floor(timeLeft / 60), timeLeft % 60);
       const pct = Math.max(0, (timeLeft / timeTotal) * 100);
       timerBarFill.style.width = pct + '%';
       if (timeLeft === 10) {
-         alert("Hurry up! Only 10 seconds left!");
+        alert("Hurry up! Only 10 seconds left!");
       }
     }, 1000);
   }
@@ -304,6 +315,7 @@
     starCount = 3;
     updateUI();
     started = false;
+    paused = false; // ✅ Reset pause state
     // enable hint based on difficulty
     hintBtn.style.display = difficulties[selectedDifficulty].hideHint ? 'none' : '';
     // ensure cards are interactive
@@ -312,6 +324,13 @@
     if (moveLimitEnabled) {
       setMoveLimitForDifficulty(selectedDifficulty);
     }
+    
+    // ✅ --- START OF PAUSE/RESUME FIX ---
+    // Reset button states
+    if (pauseBtn) pauseBtn.disabled = true; // Can't pause until game starts
+    if (resumeBtn) resumeBtn.disabled = true;
+    deckEl.style.opacity = '1'; // Ensure deck is visible
+    // ✅ --- END OF PAUSE/RESUME FIX ---
   }
 
   // card interactions
@@ -354,6 +373,7 @@
   }
 
   function onCardClick(card) {
+    if (paused) return;
     // Prevent interaction while resolving a pair
     if (locked) return;
 
@@ -361,7 +381,11 @@
     if (card.classList.contains('is-flip') || card.classList.contains('matched')) return;
 
     // Start timer if first click
-    if (!started) { started = true; startTimer(); }
+    if (!started) { 
+      started = true; 
+      startTimer(); 
+      if (pauseBtn) pauseBtn.disabled = false; // ✅ Enable pause button
+    }
 
     // Flip this card
     card.classList.add('is-flip');
@@ -424,6 +448,9 @@
   function checkWin() {
     if (matched === totalTiles) {
       stopTimer();
+      // ✅ Disable buttons on win
+      if (pauseBtn) pauseBtn.disabled = true;
+      if (resumeBtn) resumeBtn.disabled = true;
       showWinModal();
     }
   }
@@ -483,6 +510,11 @@
   function onTimeUp() {
     // disable further card clicks
     Array.from(deckEl.querySelectorAll('.card')).forEach(c => c.setAttribute('aria-disabled', 'true'));
+    
+    // ✅ Disable buttons on time up
+    if (pauseBtn) pauseBtn.disabled = true;
+    if (resumeBtn) resumeBtn.disabled = true;
+
     showLoseModal();
   }
 
@@ -643,6 +675,46 @@
     playDemoBtn.disabled = false; locked = false;
   }
   if (playDemoBtn) playDemoBtn.addEventListener('click', () => { playDemo(); });
+     
+  
+  // ✅ --- START OF PAUSE/RESUME FIX ---
+  // Delete the old listener block for 'pauseResumeBtn'
+  
+  // Add listener for the new PAUSE button
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', () => {
+      if (!started || paused) return; // Ignore if not started or already paused
+      
+      paused = true;
+      
+      // Update UI
+      pauseBtn.disabled = true;
+      resumeBtn.disabled = false;
+      deckEl.style.opacity = '0.5';
+      Array.from(deckEl.querySelectorAll('.card')).forEach(c => {
+        c.setAttribute('aria-disabled', 'true');
+      });
+    });
+  }
+
+  // Add listener for the new RESUME button
+  if (resumeBtn) {
+    resumeBtn.addEventListener('click', () => {
+      if (!started || !paused) return; // Ignore if not started or not paused
+      
+      paused = false;
+
+      // Update UI
+      pauseBtn.disabled = false;
+      resumeBtn.disabled = true;
+      deckEl.style.opacity = '1';
+      Array.from(deckEl.querySelectorAll('.card:not(.matched)')).forEach(c => {
+        c.removeAttribute('aria-disabled');
+      });
+    });
+  }
+  // ✅ --- END OF PAUSE/RESUME FIX ---
+
 
   // init
   resetGame();

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,103 +15,108 @@
 </head>
 
 <body onload="initTheme()">
-  <div class="app" role="application" aria-label="Vault‑Tec Memory Game">
- <aside class="panel" aria-hidden="false">
-  <div class="brand">
-    <div class="vault-badge"><img src="img/LogoMain.png"></div>
-    <div>
-      <h1 class="title">Vault‑Tec Memory</h1>
-      <div class="subtitle">Pip‑Boy Training — Find all Tech Pairs</div>
-    </div>
-  </div>
-
-  <div class="theme-toggle">
-    <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
-      <span class="theme-icon light">☀️</span>
-      <span class="theme-icon dark">🌙</span>
-    </button>
-  </div>
-
-  <div class="score-box">
-    <div class="score-row">
-      <div>
-        <div class="label">Moves</div>
-        <div class="score-big" id="moves">0</div>
-      </div>
-      <div>
-        <div class="label">Time</div>
-        <div class="score-big" id="time">00:00</div>
-        <div class="timer-bar" aria-hidden="true"><div id="timerBar" class="timer-bar-fill"></div></div>
-      </div>
-    </div>
-
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem">
-      <div>
-        <div class="label">Star Rating</div>
-        <div class="stars" id="star-rating">
-          <div class="star" data-star="1">★</div>
-          <div class="star" data-star="2">★</div>
-          <div class="star" data-star="3">★</div>
+  <div class="app" role="application" aria-label="Vault-Tec Memory Game">
+    <aside class="panel" aria-hidden="false">
+      <div class="brand">
+        <div class="vault-badge"><img src="img/LogoMain.png"></div>
+        <div>
+          <h1 class="title">Vault-Tec Memory</h1>
+          <div class="subtitle">Pip-Boy Training — Find all Tech Pairs</div>
         </div>
       </div>
 
-      <div style="text-align:right">
-        <div class="label">Pairs</div>
-        <div class="score-big" id="pairs">0 / 8</div>
+      <div class="theme-toggle">
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
+          <span class="theme-icon light">☀️</span>
+          <span class="theme-icon dark">🌙</span>
+        </button>
       </div>
-    </div>
 
-    <div style="margin-top:1.2rem;padding:0.8rem 0;border-top:1px solid rgba(137, 166, 207, 0.2)">
-      <label for="move-limit-toggle" style="display:flex;align-items:center;gap:0.5rem;cursor:pointer">
-        <input type="checkbox" id="move-limit-toggle" />
-        <span>Enable Move Limit</span>
-      </label>
-    </div>
-    <div id="move-limit-display" style="display:none;margin-top:0.6rem;padding:0.6rem;background:rgba(255, 210, 63, 0.1);border-radius:4px;color:var(--muted);font-size:0.9rem">
-      Moves: <span id="remaining-moves"></span> remaining
-    </div>
+      <div class="score-box">
+        <div class="score-row">
+          <div>
+            <div class="label">Moves</div>
+            <div class="score-big" id="moves">0</div>
+          </div>
+          <div>
+            <div class="label">Time</div>
+            <div class="score-big" id="time">00:00</div>
+            <div class="timer-bar" aria-hidden="true">
+              <div id="timerBar" class="timer-bar-fill"></div>
+            </div>
+          </div>
+        </div>
 
-    <div class="controls" style="margin-top:1.2rem">
-      <button class="btn" id="restart">Restart</button>
-      <button class="btn ghost" id="hint">Reveal 1 Pair</button>
-    </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem">
+          <div>
+            <div class="label">Star Rating</div>
+            <div class="stars" id="star-rating">
+              <div class="star" data-star="1">★</div>
+              <div class="star" data-star="2">★</div>
+              <div class="star" data-star="3">★</div>
+            </div>
+          </div>
 
-    <div class="hint" style="margin-top:1rem;padding:0.8rem;background:rgba(137, 166, 207, 0.1);border-radius:4px">
-      Tip: Try to remember positions — the Pip‑Boy rewards patience.
-    </div>
-    
-    <!-- Leaderboard (top-5 per difficulty) -->
-    <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(137, 166, 207, 0.2)">
-      <div class="label" style="margin-bottom:0.8rem">Leaderboard</div>
-      <div class="lb-list" id="leaderboardList" style="margin-bottom:1rem"></div>
-      <div class="lb-controls" style="display:grid;grid-template-columns:repeat(2, 1fr);gap:0.5rem">
-        <button class="btn ghost" id="openHighScores">High Scores</button>
-        <button class="btn ghost" id="exportLb">Export</button>
-        <button class="btn ghost" id="shareLb">Share</button>
-        <button class="btn ghost" id="clearLb">Clear</button>
+          <div style="text-align:right">
+            <div class="label">Pairs</div>
+            <div class="score-big" id="pairs">0 / 8</div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.2rem;padding:0.8rem 0;border-top:1px solid rgba(137, 166, 207, 0.2)">
+          <label for="move-limit-toggle" style="display:flex;align-items:center;gap:0.5rem;cursor:pointer">
+            <input type="checkbox" id="move-limit-toggle" />
+            <span>Enable Move Limit</span>
+          </label>
+        </div>
+
+        <div id="move-limit-display" style="display:none;margin-top:0.6rem;padding:0.6rem;background:rgba(255, 210, 63, 0.1);border-radius:4px;color:var(--muted);font-size:0.9rem">
+          Moves: <span id="remaining-moves"></span> remaining
+        </div>
+
+        <!-- ✅ Updated Controls Section with Pause/Resume -->
+        <div class="controls" style="margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:0.5rem">
+          <button class="btn" id="restart">Restart</button>
+          <button class="btn ghost" id="hint">Reveal 1 Pair</button>
+          <button class="btn ghost" id="pause-btn">Pause</button>
+          <button class="btn ghost" id="resume-btn" disabled>Resume</button>
+        </div>
+
+        <div class="hint" style="margin-top:1rem;padding:0.8rem;background:rgba(137, 166, 207, 0.1);border-radius:4px">
+          Tip: Try to remember positions — the Pip-Boy rewards patience.
+        </div>
+
+        <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(137, 166, 207, 0.2)">
+          <div class="label" style="margin-bottom:0.8rem">Leaderboard</div>
+          <div class="lb-list" id="leaderboardList" style="margin-bottom:1rem"></div>
+          <div class="lb-controls" style="display:grid;grid-template-columns:repeat(2, 1fr);gap:0.5rem">
+            <button class="btn ghost" id="openHighScores">High Scores</button>
+            <button class="btn ghost" id="exportLb">Export</button>
+            <button class="btn ghost" id="shareLb">Share</button>
+            <button class="btn ghost" id="clearLb">Clear</button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div style="margin-top:1.5rem;padding:1rem;background:rgba(137, 166, 207, 0.08);border-radius:6px;font-size:0.85rem;color:#89a6cf;display:flex;gap:0.8rem;align-items:flex-start">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><path d="M12 2v6" stroke="#ffd23f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 8c1-6 14-6 14 0" stroke="#89a6cf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-    <div>Designed with Vault‑Tec aesthetics — blue panels, bold yellow accents and terminal fonts.</div>
-  </div>
-</aside>
+      <div style="margin-top:1.5rem;padding:1rem;background:rgba(137, 166, 207, 0.08);border-radius:6px;font-size:0.85rem;color:#89a6cf;display:flex;gap:0.8rem;align-items:flex-start">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0;margin-top:2px">
+          <path d="M12 2v6" stroke="#ffd23f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M5 8c1-6 14-6 14 0" stroke="#89a6cf" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <div>Designed with Vault-Tec aesthetics — blue panels, bold yellow accents and terminal fonts.</div>
+      </div>
+    </aside>
 
     <main class="game">
-      <div class="top-row" >
+      <div class="top-row">
         <div class="progress">Find all pairs — Good luck, Vault Dweller.</div>
-        <div class="top-btns" >
-
+        <div class="top-btns">
           <div id="difficultyControls" style="font-family:'Share Tech Mono',monospace;color:var(--muted);display:flex;gap:0.4rem;align-items:center">
             <div style="color:var(--muted)">Difficulty:</div>
             <button class="btn difficulty-btn" data-diff="easy">Easy</button>
             <button class="btn difficulty-btn btn--active" data-diff="medium">Medium</button>
             <button class="btn difficulty-btn" data-diff="hard">Hard</button>
           </div>
-          
-          <!-- Small controls: Mute and Play Demo -->
           <div style="display:flex;gap:0.5rem;align-items:center">
             <button class="btn ghost" id="mute" aria-pressed="false">Mute</button>
             <button class="btn ghost" id="playDemo">Play Demo</button>
@@ -122,20 +126,16 @@
 
       <section class="deck" id="deck" aria-live="polite" aria-label="Game cards"></section>
 
-  <!-- confetti canvas used by the win animation -->
-  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+      <canvas id="confettiCanvas" aria-hidden="true"></canvas>
 
       <div style="width:100%;display:flex;align-items:center;justify-content:center">
         <button class="btn" id="restart-bottom">Restart Game</button>
       </div>
-
     </main>
   </div>
+
   <div class="page-container">
-
-    <div class="app" role="application" aria-label="Vault-Tec Memory Game">
-      </div>
-
+    <div class="app" role="application" aria-label="Vault-Tec Memory Game"></div>
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-brand">
@@ -143,19 +143,16 @@
           <span>Vault-Tec Memory Trainer | Pip-Boy Edition</span>
         </div>
         <div class="footer-info">
-          This App is designed and build for educational purposes         <!--redifened the footer content-->
+          This App is designed and build for educational purposes
         </div>
       </div>
     </footer>
-  </div> 
-  
+  </div>
   <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-box" role="document">
       <h2 id="modalTitle"></h2>
       <div class="subtitle" id="modalMessage"></div>
-
       <div class="modal-stats" id="modalStats"></div>
-
       <div style="display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end">
         <button class="btn ghost" id="closeModal">Close</button>
         <button class="btn" id="playAgain">Play Again</button>
@@ -163,7 +160,7 @@
     </div>
   </div>
 
-  <!-- High Scores Modal -->
+
   <div class="modal-overlay" id="highScoresOverlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-box" role="document">
       <h2>High Scores</h2>
@@ -176,7 +173,8 @@
       </div>
     </div>
   </div>
+
+  <!-- ✅ Add your pause/resume logic in app.js -->
   <script src="src/js/app.js"></script>
 </body>
-
 </html>
